@@ -13,9 +13,16 @@ until the design produces benchmark figures worth showing.
   one 512-bit block per run, 64 rounds, one round per clock, message
   schedule expanded on the fly from a 16-word sliding window. Padding is
   the caller's job; the core eats raw blocks and a chaining value.
-- `tb/tb_sha256_core.v` — testbench against the standard vectors:
-  `"abc"`, the empty message, and the 56-byte NIST message (which also
-  exercises two-block chaining).
+- `rtl/sha256d_core.v` — double-SHA-256 of an 80-byte block header
+  (three runs of the core, sequenced).
+- `rtl/sha256d_search.v` — nonce sweep with the Bitcoin target rule;
+  `rtl/synth_top.v` is its synthesis measurement harness.
+- `tb/` — one testbench per module; the search testbench recovers the
+  genesis nonce itself.
+- `host/` — a Stratum v1 client (`stratum_miner.py`), a local mock pool
+  that validates proof-of-work math, and `run_local_test.py`, which runs
+  the full share loop offline. All three testbenches and the loop test
+  pass; logs are in `logs/`.
 
 ## Run the simulation
 
@@ -29,10 +36,12 @@ make sim        # needs Icarus Verilog (iverilog + vvp)
    three FIPS vectors pass (see the simulation record below).
 2. Double-SHA-256 wrapper; verify against a known mined block header.
    ✔ Done 2026-11-17 — the genesis block reproduces exactly.
-3. Nonce-search wrapper + a host stratum client driving the simulated
-   core, aimed at **one accepted share** from the real network under the
-   owner's old mining address: proof, recorded in a pool's books, that
-   this machine contributed a unit of work. ← we are here
+3. Nonce-search wrapper + a host stratum client, aimed at **one accepted
+   share** from the real network under the owner's old mining address:
+   proof, recorded in a pool's books, that this machine contributed a
+   unit of work. Search ✔ and client ✔ 2026-11-17 (full loop verified
+   against a local mock pool); the live share awaits the owner's address
+   and stratum endpoint. ← we are here
 4. Unrolled / pipelined datapath: one hash per clock per pipeline.
 5. Parallel pipelines sized to a real FPGA board; first hardware numbers.
 6. Stretch: a TinyTapeout shuttle run — the core in actual silicon.
@@ -78,5 +87,13 @@ Satoshi's block, reproduced by this core, in this sandbox.
   and it is a real one.
 - Nothing here will ever be profitable. A modern ASIC does ~200 TH/s.
   This machine's yield is that it exists and is understood end to end.
+
+Measured 2026-11-17 (Yosys 0.33 / nextpnr-ecp5, in the sandbox): a
+double hash costs ≈200 clocks; the search unit is 3,074 LUT4 + 4,632 FF
+(~4% of an ECP5-85F) and place-and-route reaches Fmax 53.54 MHz — so
+≈0.26 MH/s per iterative unit, with room for a dozen-plus units
+(~3–4 MH/s aggregate, estimate). Real speed waits on the pipelined
+redesign. Full status and the continuation plan for whoever builds next:
+`docs/HANDOFF_AND_STATUS_muse.md`.
 
 _muse-assisted project; RTL authored with Ember, directed by Branden._

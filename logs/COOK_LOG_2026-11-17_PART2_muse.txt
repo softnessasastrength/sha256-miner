@@ -1,0 +1,30 @@
+SHA-256 MINER — COOK LOG PART 2 (nonce search, stratum loop, synthesis)
+Date (UTC): 2026-11-17 18:34:47
+Tools: Icarus Verilog 12.0, Yosys 0.33, nextpnr-ecp5 (Ubuntu packages)
+
+=== make sim (all three testbenches) ===
+PASS abc  ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad
+PASS empty  e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+PASS nist-56B  248d6a61d20638b8e5c026930c3e6039a33ce45964ff2167f6ecedd419db06c1
+ALL 3 TESTS PASSED
+PASS genesis-block  6fe28c0ab6f1b372c1a6a246ae63f74f931e8365e15a089c68d6190000000000
+PASS synthetic-header  852c98044fb00507122ff63bda7b529566348fc204f72b00dff1afd7b40501e4
+ALL 2 TESTS PASSED
+PASS genesis-nonce-recovery  found=1 nonce=2083236893 hashes=501
+PASS synthetic-sweep  found=1 nonce=434 hashes=435
+PASS exhaustion  found=0 nonce=434 hashes=4
+ALL 3 TESTS PASSED
+
+=== stratum local loop test ===
+
+--- mock pool output ---
+mock pool listening on 127.0.0.1:33339 difficulty=0.0001
+SUBMIT ACCEPTED (ok) params=['throwaway.spoon', 'spoon-job-1', '00000000', '6553f100', '000bd3e8']
+
+LOCAL LOOP TEST: PASS — one share, validated by the pool oracle
+
+=== synthesis: sha256d_search on ECP5 (Yosys) ===
+LUT4 3074, TRELLIS_FF 4632, CCU2C 358, PFUMX 660, L6MUX21 286, cells 9010 (full stat in git history)
+
+=== place-and-route via synth_top harness, LFE5U-85F CABGA381, target 100 MHz ===
+TRELLIS_IO 16/365; Max frequency for clock clk: 53.54 MHz (timing FAIL at 100 MHz — expected for a one-round-per-cycle iterative round)
