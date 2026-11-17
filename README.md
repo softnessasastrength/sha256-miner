@@ -27,11 +27,15 @@ make sim        # needs Icarus Verilog (iverilog + vvp)
 
 1. **Iterative core, verified in simulation.** ✔ Done 2026-11-17 — all
    three FIPS vectors pass (see the simulation record below).
-2. Double-SHA-256 wrapper + nonce counter; verify against a known mined
-   block header (the genesis block is the obvious witness). ← we are here
-3. Unrolled / pipelined datapath: one hash per clock per pipeline.
-4. Parallel pipelines sized to a real FPGA board; first hardware numbers.
-5. Stretch: a TinyTapeout shuttle run — the core in actual silicon.
+2. Double-SHA-256 wrapper; verify against a known mined block header.
+   ✔ Done 2026-11-17 — the genesis block reproduces exactly.
+3. Nonce-search wrapper + a host stratum client driving the simulated
+   core, aimed at **one accepted share** from the real network under the
+   owner's old mining address: proof, recorded in a pool's books, that
+   this machine contributed a unit of work. ← we are here
+4. Unrolled / pipelined datapath: one hash per clock per pipeline.
+5. Parallel pipelines sized to a real FPGA board; first hardware numbers.
+6. Stretch: a TinyTapeout shuttle run — the core in actual silicon.
 
 ## Simulation record
 
@@ -43,6 +47,18 @@ PASS empty     e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 PASS nist-56B  248d6a61d20638b8e5c026930c3e6039a33ce45964ff2167f6ecedd419db06c1
 ALL 3 TESTS PASSED
 ```
+
+Same day, the double-hash wrapper (`rtl/sha256d_core.v`), same flow:
+
+```
+PASS genesis-block     6fe28c0ab6f1b372c1a6a246ae63f74f931e8365e15a089c68d6190000000000
+PASS synthetic-header  852c98044fb00507122ff63bda7b529566348fc204f72b00dff1afd7b40501e4
+ALL 2 TESTS PASSED
+```
+
+The genesis digest is in internal byte order; reversed, it is the famous
+`000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f` —
+Satoshi's block, reproduced by this core, in this sandbox.
 
 ## Hardware
 
