@@ -32,6 +32,14 @@ make sim        # needs Icarus Verilog (iverilog + vvp)
 4. Parallel pipelines sized to a real FPGA board; first hardware numbers.
 5. Stretch: a TinyTapeout shuttle run — the core in actual silicon.
 
+## Hardware
+
+- `docs/BOARD_PROPOSAL_v1_muse.md` — **SPOON-1**, the proposed board: a
+  Lattice ECP5 FPGA + ESP32-S3 host, designed from the start to live
+  inside a dead cable box (the warmth is the camouflage). Proposal only —
+  no schematic or layout exists yet, and the path to five boards is
+  spelled out in the document.
+
 ## Honest numbers, stated in advance
 
 - The iterative core does one hash per 64 clocks: at 100 MHz that is
