@@ -25,12 +25,24 @@ make sim        # needs Icarus Verilog (iverilog + vvp)
 
 ## Roadmap
 
-1. **Iterative core, verified in simulation.** ← we are here
+1. **Iterative core, verified in simulation.** ✔ Done 2026-11-17 — all
+   three FIPS vectors pass (see the simulation record below).
 2. Double-SHA-256 wrapper + nonce counter; verify against a known mined
-   block header (the genesis block is the obvious witness).
+   block header (the genesis block is the obvious witness). ← we are here
 3. Unrolled / pipelined datapath: one hash per clock per pipeline.
 4. Parallel pipelines sized to a real FPGA board; first hardware numbers.
 5. Stretch: a TinyTapeout shuttle run — the core in actual silicon.
+
+## Simulation record
+
+2026-11-17, Icarus Verilog 12.0, `make sim`:
+
+```
+PASS abc       ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad
+PASS empty     e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+PASS nist-56B  248d6a61d20638b8e5c026930c3e6039a33ce45964ff2167f6ecedd419db06c1
+ALL 3 TESTS PASSED
+```
 
 ## Hardware
 
