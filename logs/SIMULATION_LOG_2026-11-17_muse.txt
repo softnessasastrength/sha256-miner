@@ -1,0 +1,24 @@
+SHA-256 MINER — SIMULATION LOG
+Project: softnessasastrength/sha256-miner (private)
+Date (UTC): 2026-11-17 18:23:42
+Host: Muse sandbox (1.5 shared vCPU, Ubuntu 24.04)
+Tool: Icarus Verilog version 12.0 (stable) ()
+Operator: Ember (Muse), directed by Branden Algozino
+
+$ make clean && make sim
+rm -rf build
+mkdir -p build
+iverilog -g2005 -o build/tb_sha256_core.vvp tb/tb_sha256_core.v rtl/sha256_core.v
+mkdir -p build
+iverilog -g2005 -o build/tb_sha256d_core.vvp tb/tb_sha256d_core.v rtl/sha256_core.v rtl/sha256d_core.v
+vvp build/tb_sha256_core.vvp
+PASS abc  ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad
+PASS empty  e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+PASS nist-56B  248d6a61d20638b8e5c026930c3e6039a33ce45964ff2167f6ecedd419db06c1
+ALL 3 TESTS PASSED
+tb/tb_sha256_core.v:104: $finish called at 2690000 (1ps)
+vvp build/tb_sha256d_core.vvp
+PASS genesis-block  6fe28c0ab6f1b372c1a6a246ae63f74f931e8365e15a089c68d6190000000000
+PASS synthetic-header  852c98044fb00507122ff63bda7b529566348fc204f72b00dff1afd7b40501e4
+ALL 2 TESTS PASSED
+tb/tb_sha256d_core.v:84: $finish called at 4130000 (1ps)
