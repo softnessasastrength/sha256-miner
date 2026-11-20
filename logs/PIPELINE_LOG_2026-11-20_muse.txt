@@ -1,0 +1,159 @@
+SHA-256 MINER — PIPELINED CORE (§3.3) LOG 2026-11-20
+Operator: Ember (Muse), directed by Branden Algozino ("keep cooking")
+Tools: Icarus Verilog 12.0 (functional sim), Verilator 5.020 (speed).
+NOTE: mid-session the sandbox service restarted and the apt-installed
+EDA tools vanished with the system image (files under ~/workspace all
+survived). Toolchain restored from the YosysHQ OSS CAD Suite
+(2026-11-20 build) installed under ~/workspace/tools/ — see
+logs/oss_cad_suite_install.txt. Synthesis numbers below come from
+THAT suite's Yosys/nextpnr and are labelled with their versions;
+the iterative core's 2026-11-17 numbers came from Yosys 0.33 /
+nextpnr-ecp5 0.6. Synthesis figures are flow-dependent estimates,
+never benchmarks.
+
+=== DESIGN ===
+rtl/sha256_pipe.v — sha256_pipe: 64 stages of sha256_pipe_stage, one
+round per stage, one block accepted per clock once full. Per-stage
+state: vars (256) + chaining value (256) + schedule window (512) +
+unconsumed block words (512, stages 0..15 only — WITH_BLK parameter).
+Round math identical to rtl/sha256_core.v. Registered final add;
+latency 65 clocks; results in order, one per clock.
+rtl/sha256d_pipe_search.v — three sha256_pipe cores cascaded
+(A: header block 1; B: header block 2 + nonce; C: hash of digest),
+nonce carried as a tag through 65-deep shift registers per hop.
+Throughput 1 hash/clock at full rate; first hit = lowest nonce.
+Same external interface as sha256d_search.
+
+=== FUNCTIONAL SIM — tb_sha256_pipe (Icarus) ===
+20/20 checks PASS:
+- outputs #0..#2, fed on three consecutive clocks: "abc" ba7816bf...,
+  empty e3b0c442..., 55-byte sequence block e87b2530... (expected
+  digest computed with Python hashlib) — in order, consecutive.
+- output #4: NIST 56-byte message via two-block chaining (block 1
+  digest captured and fed back as state): 248d6a61... PASS.
+- outputs #5..#20: burst of 16 identical blocks, 16 identical
+  digests, no cross-talk.
+- Latency: first output 65 register stages after input (testbench
+  cycle counter reads 66 including the feed cycle).
+Raw output: this log's companion run, reproduced in the session
+record; rerun with `make sim`.
+
+=== FUNCTIONAL SIM — tb_sha256d_pipe_search (Icarus) ===
+logs/pipe_search_icarus_run.txt — ALL 3 TESTS PASSED, EXIT=0:
+- genesis-nonce-recovery  found=1 nonce=2083236893 hashes=501
+- synthetic-sweep         found=1 nonce=434 hashes=435
+- exhaustion              found=0 hashes=4
+(The 100k-nonce throughput test is gated behind +thru in the TB:
+Icarus is too slow on this design; throughput is measured under
+Verilator below.)
+
+=== VERILATOR THROUGHPUT (host/sim_main_pipe_search.cpp) ===
+Toolchain note resolved: the apt packages came back at the ORIGINAL
+versions (Icarus 12.0, Yosys 0.33, nextpnr-ecp5 0.6, Verilator 5.020);
+the OSS CAD Suite copy stays in ~/workspace/tools/ as a spare (its
+2026-11-20 build needs GLIBC 2.43 > this system's 2.39, so its
+binaries do not run here — the apt set is the working toolchain).
+- genesis:   RESULT FOUND nonce=2083236893 hashes=501
+             digest=6fe28c0ab6f1b372...0000  CLOCKS 696 (= 501 + 195)
+- synthetic: RESULT FOUND nonce=434 hashes=435  CLOCKS 630 (= 435 + 195)
+- throughput sweep, 1,000,000 nonces, target 0:
+             RESULT MISS hashes=1000000  CLOCKS 1000195
+             WALL_SECONDS 7.960  ->  SIM_HASHRATE 125,623 H/s
+  1,000,195 clocks for 1,000,000 hashes = 1.000 hash/clock sustained
+  (the 195 extra clocks are exactly the cascade fill latency).
+MILESTONE: rung 3 (100 kH/s) CROSSED — measured, this log is the
+evidence. Ladder complete: 61 -> 24,495 -> 125,623 H/s.
+
+=== SYNTHESIS (ECP5 LFE5U-85F) ===
+(completed — see "ECP5 PIPELINED SYNTHESIS" and "ECP5 PLACE-AND-
+ROUTE" sections at the end of this log: single pipe 64,481 FF /
+34,890 LUT4, routed Fmax 50.15 MHz, ~50.15 MH/s SYNTHESIS ESTIMATE)
+
+----------------------------------------------------------------------
+SKY130 SYNTHESIS + LAYOUT VISUALISATION (fourth steer — 2026-11-20)
+----------------------------------------------------------------------
+Tools: Yosys 0.33 (apt) against the sky130_fd_sc_hd liberty from the
+volare-enabled PDK (sky130A, chipfoundry fa87f8f). Full log:
+logs/yosys_sky130_2026-11-20.txt. Netlists: build/synth_top_sky130.json
++ .v (the SAME synth_top harness as the ECP5 flow).
+
+  synth_top (search + serial harness): 20,305 cells, 217,335.94 um^2
+  sha256_core alone:                    9,241 cells,  82,721.84 um^2
+    (dfxtp_1 x1832, nand2_1 x2895, nor2_1 x833, mux2_1 x544,
+     maj3_1 x459, a31oi_1 x686, o21ai_0 x413, ...)
+  sha256d_core:                         3,238 cells,  42,461.97 um^2
+  sha256d_search (design only):         5,748 cells,  58,629.98 um^2
+  Design-only total: 183,814 um^2 cell area (~64% of an 8x2-tile die
+  of ~288,576 um^2 at the template's ~167x108 um/tile); core alone
+  ~4.6 tiles raw. CELL areas, pre-placement (stat -liberty).
+
+LIBRELANE HARDENING: NOT COMPLETED in this sandbox — BLOCKER:
+no OpenROAD binary is obtainable here (checked: OpenROAD GitHub
+releases ship no binaries; Ubuntu apt has no package; OSS CAD Suite
+2026-11 and 2025-01 builds do not bundle it; LibreLane 3.0.17 pip
+install expects environment tools; Docker/Nix unavailable; a source
+build is hours on 1.5 vCPU). LibreLane 3.0.17 + volare 0.20.6 ARE
+installed (venv ~/workspace/tools/llane-venv) and the sky130A PDK IS
+enabled (2.0 GB, ~/workspace/tools/pdk), so the flow is one tool
+away: on any Docker/Nix host (e.g. the Dell G5 SE) the prepared TT
+project in tt-submission/ hardens with the standard command. The TT
+template wrapper tt_um_spoon_sha256 (iterative core, serial load)
+is written and elaborates cleanly under Icarus.
+
+FALLBACK DELIVERABLES (docs/layout/) — the design as structure:
+  cell_dfxtp_1.png   transistor-level GDS portrait of the D flip-flop
+                     cell (1832 instances in sha256_core): diffusion,
+                     poly gates, local interconnect, metal-1, from
+                     the real PDK GDS, drawn by
+                     docs/render_cell_mpl_muse.py (klayout.db +
+                     matplotlib — the headless KLayout LayoutView
+                     would not apply layer properties here; three
+                     attempts produced byte-identical empty frames,
+                     so the geometry is plotted directly instead).
+  cell_nand2_1.png, cell_maj3_1.png — same treatment (the majority
+                     gate is SHA-256's Maj function as one cell).
+  sha256_core_schematic.svg (3.7 MB, netlistsvg from the sky130
+                     netlist — zoomable vector) + .png + _zoom.png.
+
+----------------------------------------------------------------------
+ECP5 PIPELINED SYNTHESIS — PARTIAL (OOM event, honest record)
+----------------------------------------------------------------------
+synth_pipe_top (single sha256_pipe + harness) synthesis COMPLETED:
+build/synth_pipe_top.json. Cell counts (hierarchy-expanded from the
+netlist JSON): TRELLIS_FF 64,481; LUT4 34,890; PFUMX 7,108;
+CCU2C 3,936; L6MUX21 96; total leaf cells 110,511.
+The full-cascade synth_ecp5 run was OOM-KILLED by the sandbox
+(6 GB limit) inside ABC after ~19 min — Yosys 0.33's ABC blows the
+memory ceiling on a ~330k-cell design. The cascade's size is
+therefore stated from the measured single pipe: 3 x 64,481 FF =
+193,443 FF of pipeline registers alone, before tags/control —
+against the LFE5U-85F's capacity as reported by nextpnr below.
+Place-and-route of the single pipe follows in this log.
+
+----------------------------------------------------------------------
+ECP5 PLACE-AND-ROUTE — single sha256_pipe (COMPLETED 2026-11-20)
+----------------------------------------------------------------------
+nextpnr-ecp5 0.6, --85k --package CABGA381 --freq 100, on
+build/synth_pipe_top.json. Full log: logs/nextpnr_pipe_2026-11-20.txt
+(config written: build/synth_pipe_top.config, 36.9 MB). Exit 1 =
+the 100 MHz target constraint unmet (same behaviour as the
+iterative core's run); "Program finished normally."
+
+  Device utilisation (nextpnr's own report):
+    TRELLIS_FF:   64,481 / 83,640   77%
+    TRELLIS_COMB: 43,748 / 83,640   52%
+    DP16KD (BRAM): 0
+  Max frequency, post-placement estimate: 37.70 MHz
+  Max frequency, FINAL ROUTED:            50.15 MHz
+
+DERIVED (SYNTHESIS ESTIMATE, not a benchmark): one pipe at the
+routed Fmax produces 1 hash/clock = ~50.15 MH/s — about 190x the
+iterative unit's 0.26 MH/s estimate. One pipe is what fits: the
+full 3-pipe mining cascade needs 3 x 64,481 = 193,443 pipeline FF
+alone against the device's 83,640 total, and even a 2-pipe
+midstate variant (128,962 FF) exceeds it. The pipelined MINER
+therefore does not fit the LFE5U-85F; its homes are a larger FPGA
+or the sky130 ASIC route (where the same arithmetic applies in
+area: 3 pipes ~ 3x the single pipe's cell area). The single pipe's
+fit at 77% FF is itself the useful SPOON-1 datapoint: pipeline
+registers, not logic, are the currency.

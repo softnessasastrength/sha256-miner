@@ -1,0 +1,5 @@
+=== synth_pipe_top (single sha256_pipe) ===
+=== synth_pipe_search_top (full cascade) ===
+Warning: Replacing memory \tagc with list of registers. See rtl/sha256d_pipe_search.v:114
+Warning: Replacing memory \tagb with list of registers. See rtl/sha256d_pipe_search.v:95
+Warning: Replacing memory \taga with list of registers. See rtl/sha256d_pipe_search.v:73

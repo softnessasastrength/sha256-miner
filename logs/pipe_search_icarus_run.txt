@@ -1,0 +1,6 @@
+PASS genesis-nonce-recovery  found=1 nonce=2083236893 hashes=501
+PASS synthetic-sweep  found=1 nonce=434 hashes=435
+PASS exhaustion  found=0 nonce=434 hashes=4
+ALL 3 TESTS PASSED
+tb/tb_sha256d_pipe_search.v:138: $finish called at 15510000 (1ps)
+EXIT=0

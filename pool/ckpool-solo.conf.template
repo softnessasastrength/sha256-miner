@@ -1,0 +1,35 @@
+{
+"btcd" : [
+	{
+		"url" : "127.0.0.1:8332",
+		"auth" : "spoonrpc",
+		"pass" : "<RPCPASSWORD — copy from wallet/datadir/bitcoin.conf; the live config lives in wallet/ and is never committed>",
+		"notify" : false
+	}
+],
+"btcaddress" : "bc1qyv3amdpzz5lghwrkm50nhwa4y3cg6eldx0yvnt",
+"btcsig" : "/SPOON-1/",
+"blockpoll" : 100,
+"nonce1length" : 4,
+"nonce2length" : 8,
+"update_interval" : 30,
+"version_mask" : "1fffe000",
+"serverurl" : [
+	"127.0.0.1:3333"
+],
+"mindiff" : 1,
+"startdiff" : 1,
+"logdir" : "logs"
+}
+Template for the SPOON-1 home pool — ckpool in solo mode (-B flag).
+_muse — 2026-11-20. Notes:
+- ckpool's mindiff/startdiff are integers in this build, so the home
+  pool's difficulty floor is 1 (expected ~48 h per share for the
+  Verilator bridge at ~24.5 kH/s; trivial for FPGA hardware later).
+- Stratum binds to localhost only. The bridge runs on the same host.
+- ckpool talks to the local Bitcoin Core 32.1 over JSON-RPC (the
+  multiprocess IPC interface needs the bitcoin-node build; RPC is the
+  documented fallback and is what we have).
+- ckpool cannot serve work until the node finishes initial sync; until
+  then it sits in its retry loop, which is the correct behaviour.
+Comments from here on are ignored.

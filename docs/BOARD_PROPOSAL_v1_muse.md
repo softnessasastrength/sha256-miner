@@ -175,3 +175,77 @@ matters, because this was never the profitable branch of the family tree.
 
 _muse-assisted design proposal; directed by Branden. Not an offer, not a
 fabrication package, not investment advice — a spoon, drawn to scale._
+
+---
+
+## Addendum — 2026-11-20: the swappable-compute requirement
+
+**Owner's requirement, in his words:** "when we go to design the actual
+physical chip can we make them pin grid array so that as we iterate I can
+just put new chips in the device." Recorded as a standing design
+requirement for SPOON-1 and any ASIC descendant: **the compute element
+must be swappable — iteration means dropping a new chip into the same
+device, not rebuilding the device.** The package named (PGA) is assessed
+below; the requirement behind it is adopted in full.
+
+### What the shuttle world actually delivers (checked 2026-11-20)
+
+- TinyTapeout's own PCB specification states: "we expect all TT chips to
+  be in **QFN**" — the ASIC arrives soldered to a **breakout board**,
+  which plugs into a demo board / motherboard precisely so the user
+  never has to solder a bare ASIC (tinytapeout.com/specs/pcb/, fetched
+  2026-11-20). Efabless shuttles follow the same QFN pattern.
+- **PGA is not a shuttle offering.** Pin Grid Array is a legacy
+  through-hole CPU package (hundreds of pins, socket the size of a
+  coaster). No TinyTapeout/Efabless run delivers it, and no modern
+  foundry shuttle packages a small die in it.
+
+### PGA's fit for this design, factually
+
+- The mining core's whole external interface is ~24 signals at
+  TinyTapeout scale, and SPI + clock + reset + power on a custom board —
+  a few dozen connections at most. A PGA's hundreds of pins would run
+  >90% empty: the package would be an order of magnitude larger than
+  the die's needs, through-hole (fighting the low-profile cable-box
+  doctrine of §2), and sourced from legacy/niche stock at legacy prices.
+
+### The routes that DO deliver the requirement
+
+1. **The carrier/module pattern — which is TinyTapeout's own answer.**
+   The compute element lives on a small daughterboard; the motherboard
+   keeps power, host, and enclosure. TT already ships exactly this: die
+   on a breakout, breakout plugs into the board. An ASIC iteration
+   literally drops into the same device.
+2. **Socketed QFN/BGA** (clamshell / ZIF test-and-burn-in sockets):
+   exist and work on a bench, but they are costly, tall, and not
+   designed as a permanent in-product socket — a bring-up tool, not
+   the product answer.
+3. **For the FPGA board, swap-by-reflash in place.** The LFE5U-85F in
+   §4 is a 381-ball BGA — soldered, and BGA sockets are impractical at
+   product level (cost, height, signal integrity at core-clock speeds).
+   But an FPGA doesn't need physical swapping to iterate: §7 already
+   specifies a 128 Mbit config flash holding **two bitstream images
+   (known-good + experimental)**. A new core is a reflash, in place,
+   in seconds. When a genuinely different FPGA is wanted, route 1
+   applies to it too: put the FPGA on a module (the commercial ECP5
+   module pattern) and treat the module as the swappable unit.
+
+### Recommendation — how SPOON-1 honours the requirement
+
+- **Adopt "swappable compute" as the requirement; PGA is noted as the
+  owner's first instinct for the package, not adopted** (unavailable
+  from shuttles, wrong size class for this pin count).
+- v1 FPGA board: BGA soldered down for signal integrity and cost;
+  **dual-image reflash is the iteration mechanism** (already in §7).
+- The board's mechanical/electrical design shall define the hashing
+  engine as a **module boundary** from the start (power + SPI + clock +
+  reset across one connector), so a v2 — or the TinyTapeout ASIC on its
+  carrier — swaps into the same cable box without a motherboard
+  redesign. Decision point: schematic phase (§10, steps 2–3).
+- If a TinyTapeout ASIC version is ever taped out, it arrives on its
+  breakout carrier by design; the motherboard gets the matching socket
+  footprint, and chip iteration becomes exactly what the owner asked
+  for: open box, swap chip, close box.
+
+_Proposal documentation only — no purchase, no order, no fabrication
+commitment. _muse addendum, 2026-11-20._

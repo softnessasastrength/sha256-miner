@@ -1,0 +1,2 @@
+NLSV_EXIT=0
+-rw-rw---- 1 root nogroup 3674599 Nov 20 15:54 docs/layout/sha256_core_schematic.svg

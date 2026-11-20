@@ -1,1 +1,7 @@
 build/
+wallet/
+pool/ckpool/
+pool/logs/
+
+# TinyTapeout template working clone (upstream repo, not ours)
+tt/
