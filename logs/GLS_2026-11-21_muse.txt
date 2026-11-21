@@ -1,0 +1,88 @@
+GLS LOG — gate-level simulation of sky130-synthesized netlists — 2026-11-21 (_muse)
+Tools: Icarus Verilog version 12.0 (stable) (); Yosys 0.33 (git sha1 2584903a060)
+PDK: /home/hatch/workspace/tools/pdk/sky130A (volare sky130A, libs.ref/sky130_fd_sc_hd)
+Liberty: /home/hatch/workspace/tools/pdk/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+Cell models: libs.ref/sky130_fd_sc_hd/verilog/{sky130_fd_sc_hd.v, primitives.v}, compiled with -DFUNCTIONAL (specify/timing stripped; functional GLS)
+
+=== SYNTH sha256_core (recipe identical to logs/yosys_sky130_2026-11-20.txt) ===
+=== GLS COMPILE: tb_sha256_core + sha256_core_sky130_netlist ===
+/home/hatch/workspace/tools/pdk/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_fd_sc_hd.v:28405: warning: macro UNIT_DELAY undefined (and assumed null) at this point.
+/home/hatch/workspace/tools/pdk/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_fd_sc_hd.v:29034: warning: macro UNIT_DELAY undefined (and assumed null) at this point.
+/home/hatch/workspace/tools/pdk/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_fd_sc_hd.v:29516: warning: macro UNIT_DELAY undefined (and assumed null) at this point.
+/home/hatch/workspace/tools/pdk/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_fd_sc_hd.v:30103: warning: macro UNIT_DELAY undefined (and assumed null) at this point.
+/home/hatch/workspace/tools/pdk/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_fd_sc_hd.v:30557: warning: macro UNIT_DELAY undefined (and assumed null) at this point.
+/home/hatch/workspace/tools/pdk/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_fd_sc_hd.v:31239: warning: macro UNIT_DELAY undefined (and assumed null) at this point.
+/home/hatch/workspace/tools/pdk/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_fd_sc_hd.v:31817: warning: macro UNIT_DELAY undefined (and assumed null) at this point.
+/home/hatch/workspace/tools/pdk/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_fd_sc_hd.v:32482: warning: macro UNIT_DELAY undefined (and assumed null) at this point.
+/home/hatch/workspace/tools/pdk/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_fd_sc_hd.v:33022: warning: macro UNIT_DELAY undefined (and assumed null) at this point.
+/home/hatch/workspace/tools/pdk/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_fd_sc_hd.v:34670: warning: macro UNIT_DELAY undefined (and assumed null) at this point.
+/home/hatch/workspace/tools/pdk/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_fd_sc_hd.v:35267: warning: macro UNIT_DELAY undefined (and assumed null) at this point.
+/home/hatch/workspace/tools/pdk/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_fd_sc_hd.v:35856: warning: macro UNIT_DELAY undefined (and assumed null) at this point.
+/home/hatch/workspace/tools/pdk/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_fd_sc_hd.v:36538: warning: macro UNIT_DELAY undefined (and assumed null) at this point.
+/home/hatch/workspace/tools/pdk/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_fd_sc_hd.v:37214: warning: macro UNIT_DELAY undefined (and assumed null) at this point.
+/home/hatch/workspace/tools/pdk/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_fd_sc_hd.v:37764: warning: macro UNIT_DELAY undefined (and assumed null) at this point.
+/home/hatch/workspace/tools/pdk/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_fd_sc_hd.v:42375: warning: macro UNIT_DELAY undefined (and assumed null) at this point.
+/home/hatch/workspace/tools/pdk/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_fd_sc_hd.v:42837: warning: macro UNIT_DELAY undefined (and assumed null) at this point.
+/home/hatch/workspace/tools/pdk/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_fd_sc_hd.v:49162: syntax error
+I give up.
+compile exit: 2
+
+=== GLS RUN: sha256_core netlist vs FIPS vectors ===
+build/gls/tb_core_gls.vvp: Unable to open input file.
+=== GLS COMPILE (retry): models = build-local copies with `endif trailing tokens stripped (2,176 + 54 lines; verified only-endif-lines differ from PDK originals); -DFUNCTIONAL -DUNIT_DELAY=#0 ===
+compile exit: 0
+
+=== GLS RUN: sha256_core NETLIST vs FIPS 180-4 vectors ===
+PASS abc  ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad
+PASS empty  e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+PASS nist-56B  248d6a61d20638b8e5c026930c3e6039a33ce45964ff2167f6ecedd419db06c1
+ALL 3 TESTS PASSED
+tb/tb_sha256_core.v:104: $finish called at 2690000 (1ps)
+
+=== GLS COMPILE: tb_sha256d_core + sha256d_core_sky130_netlist (12,480 cells incl. core submodule) ===
+compile exit: 0
+
+=== GLS RUN: sha256d_core NETLIST vs genesis + synthetic ===
+PASS genesis-block  6fe28c0ab6f1b372c1a6a246ae63f74f931e8365e15a089c68d6190000000000
+PASS synthetic-header  852c98044fb00507122ff63bda7b529566348fc204f72b00dff1afd7b40501e4
+ALL 2 TESTS PASSED
+tb/tb_sha256d_core.v:84: $finish called at 4130000 (1ps)
+
+=== GLS SUMMARY (2026-11-21) ===
+Netlists simulated (NOT the RTL):
+  - build/gls/sha256_core_sky130_netlist.v — Yosys 0.33, recipe identical to
+    logs/yosys_sky130_2026-11-20.txt (synth; dfflibmap -liberty; abc -liberty)
+    against sky130_fd_sc_hd__tt_025C_1v80.lib from the volare sky130A PDK at
+    /home/hatch/workspace/tools/pdk/sky130A. Final stat: 9,344 cells,
+    82,893.25 um2; cell census of the netlist file: dfxtp_1 x1,832 (matches the
+    2026-11-20 census exactly), nand2_1 x2,957, nor2_1 x879, a31oi_1 x686,
+    mux2_1 x544, xnor2_1 x475, o21ai_0 x430, maj3_1 x429, xor2_1 x376, ...
+    Zero generic $_ cells remain (grep count 0). (2026-11-20 reported
+    9,241 cells / 82,721.84 um2 for the core inside synth_top; the small delta
+    is abc run variance — same RTL, same recipe, same liberty.)
+  - build/gls/sha256d_core_sky130_netlist.v — 12,480 cells total
+    (sha256_core submodule 9,242 + sha256d_core top 3,238 in that mapping).
+Cell models: PDK libs.ref/sky130_fd_sc_hd/verilog/{sky130_fd_sc_hd.v,
+  primitives.v} compiled with -DFUNCTIONAL (the models' own ifdefs strip the
+  specify/timing blocks) and -DUNIT_DELAY=#0. FUNCTIONAL GLS: no timing is
+  claimed by these runs.
+Results (from the netlist simulation output above):
+  - sha256_core netlist: PASS abc ba7816bf..., PASS empty e3b0c442...,
+    PASS nist-56B 248d6a61... — ALL 3 TESTS PASSED.
+  - sha256d_core netlist: PASS genesis-block 6fe28c0a... (the genesis double
+    hash, internal byte order), PASS synthetic-header 852c9804... —
+    ALL 2 TESTS PASSED.
+Hazards and handling:
+  - X-initialisation: NO forcing or force/release was needed and none was
+    used. The RTL resets only t/busy/done (synchronous reset, mapped by
+    dfflibmap to dfxtp + reset logic); every other register is loaded on
+    `start` before any read, and the w[] window is filled with real block
+    words during t<16 before w_expand is first consumed at t>=16. The
+    project's testbenches were used UNMODIFIED.
+  - Icarus vs PDK models: Icarus 12.0 rejects trailing tokens after `endif
+    (2,176 occurrences in sky130_fd_sc_hd.v, 54 in primitives.v; -g2012 does
+    not help). Handled with build-local copies (build/gls/*_func.v) with only
+    those tokens stripped; a diff excluding `endif lines proves the copies
+    are otherwise byte-identical to the PDK originals, which are untouched.
+  - Specify-block timing warnings: none arise under FUNCTIONAL (stripped by
+    the models themselves). No functional failure was waived or hidden.

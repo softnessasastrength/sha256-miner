@@ -1,0 +1,49 @@
+EQUIV LOG — formal equivalence, RTL vs synthesized netlist, sha256_core — 2026-11-21 (_muse)
+Tool: Yosys 0.33 (git sha1 2584903a060)
+Gold: rtl/sha256_core.v, prepped with proc; memory (w[] exploded to flops); opt_clean — module renamed gold_core.
+Gate: same RTL through full generic synth (synth -top sha256_core; NO liberty mapping) — module renamed gate_core.
+Method: equiv_make gold_core gate_core equiv; equiv_simple (SAT, combinational given paired state); equiv_induct (sequential induction).
+
+=== equiv_make ===
+Paired gold_core vs gate_core by name: 2,254 $equiv cells created (45 groups).
+All 2,254 start unproven; the passes below discharge them.
+
+=== equiv_simple (SAT; combinational given paired state) ===
+Log: build/gls/equiv_simple.log. Finished in ~2 s wall.
+Result: 422 $equiv cells PROVEN. 1,832 remain unproven, and they are exactly:
+  - all 1,800 register outputs: w[] 512, blk 512, st 256, digest 256,
+    a..h 8x32 = 256, t 6, busy 1, done 1;
+  - the 32 K() function-result wires.
+Register outputs cannot be discharged combinationally by construction; they
+are the induction pass's workset. Every combinational point equiv_simple
+could settle, it settled.
+
+=== equiv_induct -seq 4 (sequential induction, SAT) ===
+Log: build/gls/equiv_induct.log. CPU 512 s in the pass (625k-clause step
+problem) on the sandbox's throttled vCPU share. Tool verdict, verbatim:
+  "Found 1832 unproven $equiv cells in module equiv:"
+  "Proving existence of base case for step 1. (286301 clauses over 110347 variables)"
+  "Proving induction step 1. (625672 clauses over 237162 variables)"
+  "Proof for induction step holds. Entire workset of 1832 cells proven!"
+  "Proved 1832 previously unproven $equiv cells."
+  "Of those cells 2254 are proven and 0 are unproven."
+  "Equivalence successfully proven!"
+
+=== VERDICT AND EXACT SCOPE ===
+PROVEN (unbounded, all inputs, all cycles): the fully synthesized netlist of
+sha256_core (Yosys `synth`, generic cells — the identical synthesis whose
+liberty-mapped form passed GLS) is sequentially equivalent to the RTL:
+2,254 / 2,254 $equiv cells proven, 0 unproven. Induction, not bounded model
+checking: the base case and the induction step were both discharged by SAT,
+so the equivalence holds for computations of any length, not a window.
+NOT covered by this proof: the liberty-mapping step itself (dfflibmap +
+abc -liberty into sky130 cells). That step is covered instead by gate-level
+simulation of the actual sky130 netlist on all project vectors including the
+genesis double-hash (logs/GLS_2026-11-21_muse.txt, 5/5 PASS). The chain is:
+RTL ==(formal, this log)== generic netlist ==(GLS, functional vectors)==
+sky130 netlist. Each link is labelled with the kind of evidence it carries;
+no link borrows strength from the other.
+Side attempt, no result claimed: an equiv run against a `synth -noabc`
+(word-level) gate was started, competed with the induction run for the
+sandbox's 1.5 vCPU, and was terminated during equiv_simple before any
+verdict; its intermediate RTLIL remains in build/gls/ and proves nothing.
