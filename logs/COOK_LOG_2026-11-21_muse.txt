@@ -1,0 +1,86 @@
+COOK LOG — 2026-11-21 — live-stack relaunch and real-network share hunt
+_muse. All numbers below are from tool output captured this run.
+
+CONTEXT
+Branden said "Cook" (2026-11-21 ~11:02 EST) after being told the only
+blocker was the other_tcp network permission. The sandbox had cycled
+since the 2026-11-20 cook: bitcoind/ckpool processes were dead and the
+apt toolchain (iverilog/verilator/yosys in /usr/bin) was wiped, exactly
+as the handoff's environment lesson predicted. Everything in the home
+directory persisted: Bitcoin Core 32.1 binaries (wallet/client/), the
+pruned datadir (wallet/datadir/), the ckpool binary
+(pool/ckpool/src/ckpool), the compiled Verilator bridge
+(build/tb_job_search_vl), and the OSS CAD Suite under
+~/workspace/tools (verilator present there if a rebuild is needed).
+
+EGRESS TEST (logs/EGRESS_TEST_2026-11-21_muse.txt)
+16:03:25 UTC — DNS public-pool.io -> 198.18.42.109; TCP connect
+"succeeded" in 0.02 s but the peer was 198.19.0.1:3128, i.e. the
+sandbox's intercepting network layer, not the pool itself. A connect()
+success alone therefore proves nothing here; the verdict has to come
+from real protocol traffic. It did — see below.
+
+STACK RELAUNCH
+- bitcoind started 16:03 UTC (-datadir=wallet/datadir -daemon).
+  Within seconds: 10 outbound peers (yesterday: 0). Headers presync
+  raced: debug.log shows "Pre-synchronizing blockheaders, height:
+  772000 (~79.22%)" at 16:07:59 UTC. By 16:18 UTC: headers=976924
+  (chain tip), blocks=176397 and validating (UpdateTip height=176397,
+  date 2012-04-20). IBD continues in the background; on this sandbox's
+  1.5 shared vCPU the heavy recent years will take a long time. That
+  is the background track, not a blocker for the pool hunt.
+- ckpool solo (-B -c ../wallet/ckpool-solo.conf -n spoon) started
+  16:07 UTC. Its getblocktemplate poll now returns error -10
+  "Bitcoin Core is in initial sync and waiting for blocks..." —
+  yesterday it was -9 "Bitcoin Core is not connected!". Correct
+  standby for a syncing node; it will serve real work automatically
+  once IBD completes. (One launch attempt failed on a wrong relative
+  path — src/ckpool vs ckpool/src/ckpool — corrected; no state lost.)
+
+LIVE HUNT (logs/LIVE_RUN_2026-11-21_muse.txt)
+Launcher host/run_live_public_pool.sh started 16:08:06 UTC
+(supervisor loop, Verilator bridge, user
+bc1qyv3amdpzz5lghwrkm50nhwa4y3cg6eldx0yvnt.spoon).
+- Attempts 1-2: timed out waiting for the pool's subscribe response
+  (20 s client timeout), supervisor relaunched.
+- Attempt 3 (16:08:51 UTC): "connected: extranonce1=0cd440b5
+  en2_size=8", then chunk progress on real pool work at
+  23,311-24,497 H/s (sim): 1M, 2M, ... 11M+ hashes searched in the
+  first ~8 minutes, no share yet at that point.
+
+THE FINDING — POOL DIAGNOSTIC PROBE (appended to the LIVE_RUN log)
+At ~11M hashes with no share (expected ~4.29M/share at difficulty
+0.001; P(no share) ~ 0.08), a brief independent stratum probe
+(subscribe + authorize only, then disconnect; the hunt was not
+disturbed) captured the pool's actual assignment verbatim:
+  subscribe -> result [[['mining.notify','d88fad7f']], 'd88fad7f', 8]
+  authorize -> result true
+  mining.set_difficulty -> [100000]
+  mining.notify -> real job; coinbase contains "Public-Pool".
+So: egress OPEN, pool REACHED, worker AUTHORISED, real work FLOWING —
+but public-pool.io assigns this worker difficulty 100,000, not the
+0.001 minimum yesterday's web research reported. At the measured
+~23,600 H/s the expected time to one share at difficulty 100,000 is
+2^32 x 100000 / 23600 ~ 1.8e10 s ~ 577 years (arithmetic from measured
+numbers). The hunt is therefore not viable at this pool at bridge
+hashrate, regardless of patience. The running client's own session is
+consistent with this (13M+ hashes, no share).
+
+STATE LEFT RUNNING
+- bitcoind: syncing (headers complete; blocks validating).
+- ckpool solo: standby on the syncing node (error -10).
+- The staged public-pool hunt: LEFT RUNNING under its supervisor
+  loop, as staged — it costs nothing, and if the pool's vardiff ever
+  steps this worker down it can still land. Nobody should hold their
+  breath at difficulty 100,000.
+
+WHAT §3.1 NEEDS NOW (owner decision, any one of)
+(a) A pool that verifiably assigns ~0.001 difficulty to tiny workers
+    (yesterday's "documented minimum" for public-pool.io did not
+    survive contact with the pool itself — verify by probe, not by
+    docs, next time);
+(b) our own pool after IBD completes — difficulty floor 1 in this
+    ckpool build -> ~50 h expected per share at bridge speed
+    (2^32 / 23600 ~ 182,000 s), honest but slow; or
+(c) FPGA hashrate (SPOON-1), where even difficulty 100,000 is
+    ~2.4 h/share at the pipelined core's ~50 MH/s synthesis estimate.

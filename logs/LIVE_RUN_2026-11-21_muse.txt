@@ -1,0 +1,43 @@
+live run started Sat Nov 21 16:08:06 UTC 2026 pool=public-pool.io:21496 user=bc1qyv3amdpzz5lghwrkm50nhwa4y3cg6eldx0yvnt.spoon
+Traceback (most recent call last):
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 267, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 223, in main
+    resp = pool.pump_until(sub_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 190, in pump_until
+    raise TimeoutError("timed out waiting for the pool")
+TimeoutError: timed out waiting for the pool
+client exited rc=1 at Sat Nov 21 16:08:26 UTC 2026
+Traceback (most recent call last):
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 267, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 223, in main
+    resp = pool.pump_until(sub_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 190, in pump_until
+    raise TimeoutError("timed out waiting for the pool")
+TimeoutError: timed out waiting for the pool
+client exited rc=1 at Sat Nov 21 16:08:51 UTC 2026
+connected: extranonce1=0cd440b5 en2_size=8
+  chunk @0: 1000000 hashes this segment, 24497 H/s (sim)
+  chunk @1000000: 2000000 hashes this segment, 23311 H/s (sim)
+  chunk @2000000: 3000000 hashes this segment, 23547 H/s (sim)
+  chunk @3000000: 4000000 hashes this segment, 23526 H/s (sim)
+  chunk @4000000: 5000000 hashes this segment, 23672 H/s (sim)
+  chunk @5000000: 6000000 hashes this segment, 23789 H/s (sim)
+  chunk @6000000: 7000000 hashes this segment, 23594 H/s (sim)
+  chunk @7000000: 8000000 hashes this segment, 23542 H/s (sim)
+  chunk @8000000: 9000000 hashes this segment, 23627 H/s (sim)
+  chunk @9000000: 10000000 hashes this segment, 23629 H/s (sim)
+  chunk @10000000: 11000000 hashes this segment, 23634 H/s (sim)
+  chunk @11000000: 12000000 hashes this segment, 23613 H/s (sim)
+subscribe -> {'id': 1, 'error': None, 'result': [[['mining.notify', 'd88fad7f']], 'd88fad7f', 8]}
+msg: {"id": 2, "error": null, "result": true}
+msg: {"id": null, "method": "mining.set_difficulty", "params": [100000]}
+msg: {"id": null, "method": "mining.notify", "params": ["4ab8a5", "cfb0950f8b41aff5fc244d12f688f3db87d19f510000cfdf0000000000000000", "02000000010000000000000000000000000000000000000000000000000000000000000000ffffffff1b031de80e5075626c69632d506f6f6c", "ffffffff02ec76b712000000001600142323ddb422153e8bb876
+  chunk @12000000: 13000000 hashes this segment, 23582 H/s (sim)
+  chunk @13000000: 14000000 hashes this segment, 23516 H/s (sim)
+  chunk @14000000: 15000000 hashes this segment, 23480 H/s (sim)
