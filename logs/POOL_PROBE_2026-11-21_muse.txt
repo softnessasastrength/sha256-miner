@@ -1,0 +1,79 @@
+POOL WIRE PROBES — 2026-11-21T18:37:42.858634+00:00
+user=bc1qyv3amdpzz5lghwrkm50nhwa4y3cg6eldx0yvnt.spoon  (throwaway address; public stratum info)
+Method: mining.subscribe -> mining.authorize -> mining.suggest_difficulty [0.001];
+first mining.set_difficulty captured verbatim. Documentation NOT trusted.
+
+[18:37:42.858Z] === PROBE nerdminer pool.nerdminer.io:3333 user=bc1qyv3amdpzz5lghwrkm50nhwa4y3cg6eldx0yvnt.spoon pass='x' ===
+[18:37:42.872Z] >>> {"id": 1, "method": "mining.subscribe", "params": ["sha256-miner-probe/0.1"]}
+[18:38:02.889Z] === END nerdminer: first_diff=None after_suggest=None auth=None notify=False ===
+
+[18:38:02.889Z] === PROBE sololuck-nano stratum.sololuck.io:3335 user=bc1qyv3amdpzz5lghwrkm50nhwa4y3cg6eldx0yvnt.spoon pass='x' ===
+[18:38:02.890Z] >>> {"id": 1, "method": "mining.subscribe", "params": ["sha256-miner-probe/0.1"]}
+[18:38:16.237Z] RECV ERROR: ConnectionResetError(104, 'Connection reset by peer')
+[18:38:16.237Z] === END sololuck-nano: first_diff=None after_suggest=None auth=None notify=False ===
+
+[18:38:16.237Z] === PROBE sololuck-lite stratum.sololuck.io:3333 user=bc1qyv3amdpzz5lghwrkm50nhwa4y3cg6eldx0yvnt.spoon pass='x' ===
+[18:38:16.238Z] >>> {"id": 1, "method": "mining.subscribe", "params": ["sha256-miner-probe/0.1"]}
+[18:38:30.107Z] RECV ERROR: ConnectionResetError(104, 'Connection reset by peer')
+[18:38:30.107Z] === END sololuck-lite: first_diff=None after_suggest=None auth=None notify=False ===
+
+[18:38:30.107Z] === PROBE hmpool-entry btc.hmpool.io:3337 user=bc1qyv3amdpzz5lghwrkm50nhwa4y3cg6eldx0yvnt.spoon pass='x' ===
+[18:38:30.108Z] >>> {"id": 1, "method": "mining.subscribe", "params": ["sha256-miner-probe/0.1"]}
+[18:38:44.040Z] RECV ERROR: ConnectionResetError(104, 'Connection reset by peer')
+[18:38:44.040Z] === END hmpool-entry: first_diff=None after_suggest=None auth=None notify=False ===
+
+[18:38:44.040Z] === PROBE hmpool-entry-d btc.hmpool.io:3337 user=bc1qyv3amdpzz5lghwrkm50nhwa4y3cg6eldx0yvnt.spoon pass='d=0.001' ===
+[18:38:44.041Z] >>> {"id": 1, "method": "mining.subscribe", "params": ["sha256-miner-probe/0.1"]}
+[18:38:58.377Z] RECV ERROR: ConnectionResetError(104, 'Connection reset by peer')
+[18:38:58.377Z] === END hmpool-entry-d: first_diff=None after_suggest=None auth=None notify=False ===
+
+[18:38:58.377Z] === PROBE bcmonster-solo bcmonster.com:9999 user=bc1qyv3amdpzz5lghwrkm50nhwa4y3cg6eldx0yvnt.spoon pass='x' ===
+[18:38:58.381Z] >>> {"id": 1, "method": "mining.subscribe", "params": ["sha256-miner-probe/0.1"]}
+[18:39:02.779Z] <<< {"id":1,"result":[[["mining.set_difficulty","deadbeefcafebabe7f10010000000000"],["mining.notify","deadbeefcafebabe7f10010000000000"]],"0a96105f0000",4],"error":null}
+[18:39:02.779Z] >>> {"id": 2, "method": "mining.authorize", "params": ["bc1qyv3amdpzz5lghwrkm50nhwa4y3cg6eldx0yvnt.spoon", "x"]}
+[18:39:02.780Z] <<< {"id":null,"method":"mining.set_difficulty","params":[0.001]}
+[18:39:02.780Z] *** FIRST set_difficulty = 0.001
+[18:39:02.875Z] <<< {"id":2,"result":true,"error":null}
+[18:39:02.875Z] >>> {"id": 3, "method": "mining.suggest_difficulty", "params": [0.001]}
+[18:39:02.875Z] <<< {"id":null,"method":"mining.notify","params":["05ef2214","ea4ed743ddbd9c113af4ff35f3416539fef1e75c0000055e0000000000000000","01000000010000000000000000000000000000000000000000000000000000000000000000ffffffff4c032ae80e0424e5016b0a","0b2f42434d6f6e737465722ffabe6d6de9fd96a694c6cafbf1cdb8ef44c3e963394fc1d776ad6fc54c12039c36666db5020000000000000000000000020000000000000000266a24aa21a9ed18b7c5cf0118e45b30f63dba30cc31837abc351b7c5ee023f4df02dc225c4b0a2f28a312000000001600147b50ffc547f15c7155dde77032a76cad7f7e9db729e80e00",["018627a22f06010c22b84eac8a3d107450dad4c5718ca3cbdb66e85eef9baa8b","a7c7c171df0714db372293b4f8f598d9094800544f892340d53b5eb50a4b8f5b","1d2867895efefeb64fbf85e4c9d4967b7f4a70545bb25e72cdb6055f79a31053","7748e03fb00d73151e1ec67d3e24470feac036fe42bc444c1844638689398ef6","59fdbd97de96ae8c69589f79c53ca53ed496981e763a19c22ea32f425f88c4f2","7652886325419929a9945b79d751c71f9fff3ca4bbef5fed9b75579a8e5595d5","036fbc6ece71fbe80f55ff6e46d0508d3f28b2f129a136499a545e3943c06ec7","5b58e7f598c808d703642718f9de11e569e0fa04cdb43d560a2c8cb0d5558406","ce2f478708a52f4b5c09cac4d7be18443223e473d12bb1c36e650f60c80d05f5","a81b5eba8a3f3f197dfb4df37ab1d6b795ee5a690c125de2ea37cc22ad50bec2","59194adcdd969ca33e8e73cb42d9d4119b548fac08698eaf7bd6394ab168ab8c","8f16c24cc01229ba588de04e481a8c1a0a892e18d85cb9db82507685d35be2b5"],"20000000","17021673","6b01e524",true]}
+[18:39:02.967Z] <<< {"id":null,"method":"mining.set_difficulty","params":[0.001]}
+[18:39:02.967Z] <<< {"id":3,"result":true,"error":null}
+[18:39:18.065Z] <<< {"id":null,"method":"mining.notify","params":["05ef2215","ea4ed743ddbd9c113af4ff35f3416539fef1e75c0000055e0000000000000000","01000000010000000000000000000000000000000000000000000000000000000000000000ffffffff4c032ae80e0456e5016b0a","0b2f42434d6f6e737465722ffabe6d6de9fd96a694c6cafbf1cdb8ef44c3e963394fc1d776ad6fc54c12039c36666db5020000000000000000000000020000000000000000266a24aa21a9ed30af985ee4b9914fb72f8700346b9b64a8fc14d8c6ec9f016d247a8032178773c557a712000000001600147b50ffc547f15c7155dde77032a76cad7f7e9db729e80e00",["06cd948115d9cdbd2eba2b2c839b027944431e0600b1242c28ea44c8a1c14f1d","69231c070176e82c20ed62d8889a284592b196010907c0fc19575d32c613fae6","9e9ccfed4a2d4a2d31d8f518e7793926d42b99300faab8f36d436a94371745c1","232b9f4218f76d5264839edb29214d53277f290ec5a895ee2bffd6924ca909b7","1ea9b22b45cf1811a45fc91a82662c16cc53445dd45d20650f28a55055b90723","9996205daeb95e6d4770363c30e25f6fe777fd66f208f69daa8e16efc6c01d74","3151ef27700c5539c4f811ba0b255110037f8a9e4b2496c1a6985bb98c1d6f67","5335fcaeec31148a191a197b230a1469437cad7ba046bc0f2b7cbc949673c87c","05c185444a6db0f90471adc250f97901f175e4144ccd07f0f6009ec17f9bf8de","736c1ae97672173dea57749ccbbb01b54535b0767c59270dc45f6998e2510554","a208cc25646dc4444b8d44a6f1267846dd0cd1b766fface71e57695bec288fda","d3a1c2ff3e351df3ac56c68b27c5c0858632c9f308288280040f0f7c00917f99"],"20000000","17021673","6b01e556",false]}
+[18:39:20.068Z] === END bcmonster-solo: first_diff=0.001 after_suggest=None auth=True notify=True ===
+
+[18:39:20.068Z] === PROBE bcmonster-pool bcmonster.com:9989 user=bc1qyv3amdpzz5lghwrkm50nhwa4y3cg6eldx0yvnt.spoon pass='x' ===
+[18:39:20.069Z] >>> {"id": 1, "method": "mining.subscribe", "params": ["sha256-miner-probe/0.1"]}
+[18:39:24.065Z] <<< {"id":1,"result":[[["mining.set_difficulty","deadbeefcafebabe3210010000000000"],["mining.notify","deadbeefcafebabe3210010000000000"]],"729754670000",4],"error":null}
+[18:39:24.065Z] >>> {"id": 2, "method": "mining.authorize", "params": ["bc1qyv3amdpzz5lghwrkm50nhwa4y3cg6eldx0yvnt.spoon", "x"]}
+[18:39:24.065Z] <<< {"id":null,"method":"mining.set_difficulty","params":[0.001]}
+[18:39:24.065Z] *** FIRST set_difficulty = 0.001
+[18:39:24.152Z] <<< {"id":2,"result":true,"error":null}
+[18:39:24.152Z] >>> {"id": 3, "method": "mining.suggest_difficulty", "params": [0.001]}
+[18:39:24.152Z] <<< {"id":null,"method":"mining.notify","params":["35f42211","ea4ed743ddbd9c113af4ff35f3416539fef1e75c0000055e0000000000000000","01000000010000000000000000000000000000000000000000000000000000000000000000ffffffff4c032ae80e0456e5016b0a","0b2f42434d6f6e737465722ffabe6d6de9fd96a694c6cafbf1cdb8ef44c3e963394fc1d776ad6fc54c12039c36666db5020000000000000000000000020000000000000000266a24aa21a9ed30af985ee4b9914fb72f8700346b9b64a8fc14d8c6ec9f016d247a8032178773c557a712000000001600147b50ffc547f15c7155dde77032a76cad7f7e9db729e80e00",["06cd948115d9cdbd2eba2b2c839b027944431e0600b1242c28ea44c8a1c14f1d","69231c070176e82c20ed62d8889a284592b196010907c0fc19575d32c613fae6","9e9ccfed4a2d4a2d31d8f518e7793926d42b99300faab8f36d436a94371745c1","232b9f4218f76d5264839edb29214d53277f290ec5a895ee2bffd6924ca909b7","1ea9b22b45cf1811a45fc91a82662c16cc53445dd45d20650f28a55055b90723","9996205daeb95e6d4770363c30e25f6fe777fd66f208f69daa8e16efc6c01d74","3151ef27700c5539c4f811ba0b255110037f8a9e4b2496c1a6985bb98c1d6f67","5335fcaeec31148a191a197b230a1469437cad7ba046bc0f2b7cbc949673c87c","05c185444a6db0f90471adc250f97901f175e4144ccd07f0f6009ec17f9bf8de","736c1ae97672173dea57749ccbbb01b54535b0767c59270dc45f6998e2510554","a208cc25646dc4444b8d44a6f1267846dd0cd1b766fface71e57695bec288fda","d3a1c2ff3e351df3ac56c68b27c5c0858632c9f308288280040f0f7c00917f99"],"20000000","17021673","6b01e556",true]}
+[18:39:24.235Z] <<< {"id":null,"method":"mining.set_difficulty","params":[0.001]}
+[18:39:24.235Z] <<< {"id":3,"result":true,"error":null}
+[18:39:40.252Z] === END bcmonster-pool: first_diff=0.001 after_suggest=None auth=True notify=True ===
+
+[18:39:40.252Z] === PROBE solopool stratum.solopool.com:3333 user=bc1qyv3amdpzz5lghwrkm50nhwa4y3cg6eldx0yvnt.spoon pass='x' ===
+[18:39:40.253Z] >>> {"id": 1, "method": "mining.subscribe", "params": ["sha256-miner-probe/0.1"]}
+[18:40:00.272Z] === END solopool: first_diff=None after_suggest=None auth=None notify=False ===
+
+[18:40:00.272Z] === PROBE ckpool-solo solo.ckpool.org:3333 user=bc1qyv3amdpzz5lghwrkm50nhwa4y3cg6eldx0yvnt.spoon pass='x' ===
+[18:40:00.274Z] >>> {"id": 1, "method": "mining.subscribe", "params": ["sha256-miner-probe/0.1"]}
+[18:40:20.295Z] === END ckpool-solo: first_diff=None after_suggest=None auth=None notify=False ===
+
+[18:40:20.296Z] === PROBE atlaspool stratum.atlaspool.io:3333 user=bc1qyv3amdpzz5lghwrkm50nhwa4y3cg6eldx0yvnt.spoon pass='x' ===
+[18:40:20.296Z] >>> {"id": 1, "method": "mining.subscribe", "params": ["sha256-miner-probe/0.1"]}
+[18:40:40.318Z] === END atlaspool: first_diff=None after_suggest=None auth=None notify=False ===
+
+=== SUMMARY ===
+('nerdminer', 'pool.nerdminer.io:3333', 'x', None, None, None, False)
+('sololuck-nano', 'stratum.sololuck.io:3335', 'x', None, None, None, False)
+('sololuck-lite', 'stratum.sololuck.io:3333', 'x', None, None, None, False)
+('hmpool-entry', 'btc.hmpool.io:3337', 'x', None, None, None, False)
+('hmpool-entry-d', 'btc.hmpool.io:3337', 'd=0.001', None, None, None, False)
+('bcmonster-solo', 'bcmonster.com:9999', 'x', 0.001, None, True, True)
+('bcmonster-pool', 'bcmonster.com:9989', 'x', 0.001, None, True, True)
+('solopool', 'stratum.solopool.com:3333', 'x', None, None, None, False)
+('ckpool-solo', 'solo.ckpool.org:3333', 'x', None, None, None, False)
+('atlaspool', 'stratum.atlaspool.io:3333', 'x', None, None, None, False)

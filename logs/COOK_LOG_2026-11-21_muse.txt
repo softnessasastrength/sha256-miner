@@ -103,3 +103,82 @@ agent's tree): bitcoind (resumed from persisted chainstate; blocks
 alive across several subsequent session boundaries. If a future
 reader finds them dead again, relaunch the same way; the datadir
 and all state persist on disk.
+
+ADDENDUM 2026-11-21 ~19:20 UTC — the low-difficulty switch, and the share.
+_muse.
+
+The owner ruled on §3.1's three routes at 13:36 EST: "let's do one
+that allows low diff" (route (a)); the own pool keeps cooking in
+parallel. A probe campaign was run BEFORE any switch — documentation
+is not evidence; only the wire is. Method: mining.subscribe ->
+mining.authorize as bc1qyv3amdpzz5lghwrkm50nhwa4y3cg6eldx0yvnt.spoon
+-> mining.suggest_difficulty [0.001]; the FIRST mining.set_difficulty
+each pool assigned was captured verbatim. Full evidence:
+logs/POOL_PROBE_2026-11-21_muse.txt.
+
+Wire results:
+- bcmonster.com:9999 (BTC solo lottery port): set_difficulty 0.001,
+  authorize true, real mainnet notify (coinbase height 977002,
+  /BCMonster/ tag). VERIFIED.
+- bcmonster.com:9989 (pool-mode lottery port): set_difficulty 0.001,
+  authorize true, notify. VERIFIED.
+- pool.nerdminer.io:3333, stratum.solopool.com:3333,
+  solo.ckpool.org:3333, stratum.atlaspool.io:3333: total silence for
+  the full probe window. stratum.sololuck.io:3333/:3335 and
+  btc.hmpool.io:3337: connection reset after ~14 s with no stratum
+  bytes. NO VERDICT on these six: at least one connection in the batch
+  was covered by a sandbox approval request that timed out unanswered,
+  so the non-responses cannot be attributed to the pools. They were
+  not retried (an unanswered approval is not a yes). BCMonster met
+  the target (<= 0.01) on the wire, so the switch proceeded on
+  verified evidence alone.
+
+Switch: host/run_live_bcmonster_muse.sh (the staged supervisor
+pattern, new endpoint), launched under setsid ~18:58 UTC. The client
+needed several supervisor retries (BCMonster's stratifier answers
+subscribe slowly at times — three 20 s timeouts) and connected
+19:00:14 UTC (extranonce1=0a9610650000, en2_size=4). The old
+public-pool supervisor could not be signalled from this session
+(per-session pid namespace; its recorded PID is not visible here) —
+moot in the event: the entire 16:30 stack's logs freeze at
+18:34:16 UTC (public-pool client last chunk @171M, node debug.log
+last UpdateTip height=314367, ckpool last poll), i.e. the runtime
+reaped that session too, ~2 h after the setsid relaunch. setsid
+delays the reaper; it does not defeat it. Relaunch remains the
+standing recovery, and all state persists on disk.
+
+THE SHARE — §3.1's endgame, landed 2026-11-21 19:08:38 UTC:
+  SHARE ACCEPTED #1 job=05ef222f nonce=11760654
+  hash=0000003e1bf12b15c6c8c4185ec902dcf9c14ccf5f46e892f779c59255dbd81f
+after exactly 11,760,655 hashes in the segment (the accepting chunk
+line reads "chunk @11000000: 11760655 hashes this segment,
+24393 H/s"; the winning nonce 11760654 is that chunk's last hash).
+The pool's authorize had assigned difficulty 0.001 (probe-verified;
+the client's target derives from the pool's own set_difficulty).
+The found hash's actual difficulty is 0.0161 (computed against the
+difficulty-1 target) — a ~16x overshoot of the assigned target. The
+client exited rc=0 and the supervisor logged "live run finished",
+exactly as staged.
+
+A second share landed 13 s into a relaunched pass (19:09:52 UTC):
+  SHARE ACCEPTED #1 job=289b2237 nonce=253703
+  hash=000001fea736abe4f426e2707b612e8d7545d7ae862258806994d94fb6713bfd
+(253,704 hashes at 24,864 H/s; the hash's actual difficulty is
+0.0020, 2x the assigned target.) Two accepted shares now stand in
+BCMonster's books under the throwaway address.
+
+Own pool: bitcoind and ckpool were found dead with the rest of the
+16:30 stack (logs frozen 18:34:16 UTC). Relaunched per the standing
+recovery: bitcoind (-datadir=wallet/datadir -daemon, setsid) —
+verified blocks=314,529, headers=976,940 at 19:12 UTC, and
+blocks=319,144 a few minutes later, IBD progressing fast through
+2014-era blocks; ckpool solo (-B -c ../wallet/ckpool-solo.conf
+-n spoon, from pool/) — polling again, error -10 initial-sync
+standby, which is correct behaviour until IBD completes.
+
+Left running (all setsid-detached): bitcoind (IBD), ckpool
+(standby), and a persistent BCMonster hunt
+(host/run_live_bcmonster_persistent_muse.sh — loops the verified
+client one share per pass, stops cold on any rejection) hunting
+share #3. Expect the environment to reap them eventually; relaunch
+the same way when it does.

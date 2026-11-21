@@ -59,3 +59,424 @@ msg: {"id": null, "method": "mining.notify", "params": ["4ab8a5", "cfb0950f8b41a
 live run started Sat Nov 21 16:30:57 UTC 2026 pool=public-pool.io:21496 user=bc1qyv3amdpzz5lghwrkm50nhwa4y3cg6eldx0yvnt.spoon
 connected: extranonce1=9ca4975b en2_size=8
   chunk @0: 1000000 hashes this segment, 15962 H/s (sim)
+  chunk @1000000: 2000000 hashes this segment, 16088 H/s (sim)
+  chunk @2000000: 3000000 hashes this segment, 17969 H/s (sim)
+  chunk @3000000: 4000000 hashes this segment, 19154 H/s (sim)
+  chunk @4000000: 5000000 hashes this segment, 19898 H/s (sim)
+  chunk @5000000: 6000000 hashes this segment, 20246 H/s (sim)
+  chunk @6000000: 7000000 hashes this segment, 20555 H/s (sim)
+  chunk @7000000: 8000000 hashes this segment, 20794 H/s (sim)
+  chunk @8000000: 9000000 hashes this segment, 20959 H/s (sim)
+  chunk @9000000: 10000000 hashes this segment, 21062 H/s (sim)
+  chunk @10000000: 11000000 hashes this segment, 21215 H/s (sim)
+  chunk @11000000: 12000000 hashes this segment, 21256 H/s (sim)
+  chunk @12000000: 13000000 hashes this segment, 21261 H/s (sim)
+  chunk @13000000: 14000000 hashes this segment, 21381 H/s (sim)
+  chunk @14000000: 15000000 hashes this segment, 21536 H/s (sim)
+  chunk @15000000: 16000000 hashes this segment, 21620 H/s (sim)
+  chunk @16000000: 17000000 hashes this segment, 21718 H/s (sim)
+  chunk @17000000: 18000000 hashes this segment, 21793 H/s (sim)
+  chunk @18000000: 19000000 hashes this segment, 21877 H/s (sim)
+  chunk @19000000: 20000000 hashes this segment, 21854 H/s (sim)
+  chunk @20000000: 21000000 hashes this segment, 21939 H/s (sim)
+  chunk @21000000: 22000000 hashes this segment, 22030 H/s (sim)
+  chunk @22000000: 23000000 hashes this segment, 22074 H/s (sim)
+  chunk @23000000: 24000000 hashes this segment, 22113 H/s (sim)
+  chunk @24000000: 25000000 hashes this segment, 22155 H/s (sim)
+  chunk @25000000: 26000000 hashes this segment, 22199 H/s (sim)
+  chunk @26000000: 27000000 hashes this segment, 22234 H/s (sim)
+  chunk @27000000: 28000000 hashes this segment, 22273 H/s (sim)
+  chunk @28000000: 29000000 hashes this segment, 22316 H/s (sim)
+  chunk @29000000: 30000000 hashes this segment, 22369 H/s (sim)
+  chunk @30000000: 31000000 hashes this segment, 22422 H/s (sim)
+  chunk @31000000: 32000000 hashes this segment, 22472 H/s (sim)
+  chunk @32000000: 33000000 hashes this segment, 22512 H/s (sim)
+  chunk @33000000: 34000000 hashes this segment, 22565 H/s (sim)
+  chunk @34000000: 35000000 hashes this segment, 22399 H/s (sim)
+  chunk @35000000: 36000000 hashes this segment, 22429 H/s (sim)
+  chunk @36000000: 37000000 hashes this segment, 22465 H/s (sim)
+  chunk @37000000: 38000000 hashes this segment, 22503 H/s (sim)
+  chunk @38000000: 39000000 hashes this segment, 22536 H/s (sim)
+  chunk @39000000: 40000000 hashes this segment, 22564 H/s (sim)
+  chunk @40000000: 41000000 hashes this segment, 22580 H/s (sim)
+  chunk @41000000: 42000000 hashes this segment, 22618 H/s (sim)
+  chunk @42000000: 43000000 hashes this segment, 22655 H/s (sim)
+  chunk @43000000: 44000000 hashes this segment, 22688 H/s (sim)
+  chunk @44000000: 45000000 hashes this segment, 22713 H/s (sim)
+  chunk @45000000: 46000000 hashes this segment, 22738 H/s (sim)
+  chunk @46000000: 47000000 hashes this segment, 22766 H/s (sim)
+  chunk @47000000: 48000000 hashes this segment, 22799 H/s (sim)
+  chunk @48000000: 49000000 hashes this segment, 22830 H/s (sim)
+  chunk @49000000: 50000000 hashes this segment, 22857 H/s (sim)
+  chunk @50000000: 51000000 hashes this segment, 22885 H/s (sim)
+  chunk @51000000: 52000000 hashes this segment, 22841 H/s (sim)
+  chunk @52000000: 53000000 hashes this segment, 22858 H/s (sim)
+  chunk @53000000: 54000000 hashes this segment, 22802 H/s (sim)
+  chunk @54000000: 55000000 hashes this segment, 22819 H/s (sim)
+  chunk @55000000: 56000000 hashes this segment, 22840 H/s (sim)
+  chunk @56000000: 57000000 hashes this segment, 22866 H/s (sim)
+  chunk @57000000: 58000000 hashes this segment, 22892 H/s (sim)
+  chunk @58000000: 59000000 hashes this segment, 22917 H/s (sim)
+  chunk @59000000: 60000000 hashes this segment, 22934 H/s (sim)
+  chunk @60000000: 61000000 hashes this segment, 22933 H/s (sim)
+  chunk @61000000: 62000000 hashes this segment, 22948 H/s (sim)
+  chunk @62000000: 63000000 hashes this segment, 22960 H/s (sim)
+  chunk @63000000: 64000000 hashes this segment, 22981 H/s (sim)
+  chunk @64000000: 65000000 hashes this segment, 22995 H/s (sim)
+  chunk @65000000: 66000000 hashes this segment, 23003 H/s (sim)
+  chunk @66000000: 67000000 hashes this segment, 23013 H/s (sim)
+  chunk @67000000: 68000000 hashes this segment, 23034 H/s (sim)
+  chunk @68000000: 69000000 hashes this segment, 23046 H/s (sim)
+  chunk @69000000: 70000000 hashes this segment, 23058 H/s (sim)
+  chunk @70000000: 71000000 hashes this segment, 23072 H/s (sim)
+  chunk @71000000: 72000000 hashes this segment, 23091 H/s (sim)
+  chunk @72000000: 73000000 hashes this segment, 23106 H/s (sim)
+  chunk @73000000: 74000000 hashes this segment, 23115 H/s (sim)
+  chunk @74000000: 75000000 hashes this segment, 23113 H/s (sim)
+  chunk @75000000: 76000000 hashes this segment, 23123 H/s (sim)
+  chunk @76000000: 77000000 hashes this segment, 23133 H/s (sim)
+  chunk @77000000: 78000000 hashes this segment, 23141 H/s (sim)
+  chunk @78000000: 79000000 hashes this segment, 23155 H/s (sim)
+  chunk @79000000: 80000000 hashes this segment, 23163 H/s (sim)
+  chunk @80000000: 81000000 hashes this segment, 23178 H/s (sim)
+  chunk @81000000: 82000000 hashes this segment, 23185 H/s (sim)
+  chunk @82000000: 83000000 hashes this segment, 23139 H/s (sim)
+  chunk @83000000: 84000000 hashes this segment, 23144 H/s (sim)
+  chunk @84000000: 85000000 hashes this segment, 23147 H/s (sim)
+  chunk @85000000: 86000000 hashes this segment, 23145 H/s (sim)
+  chunk @86000000: 87000000 hashes this segment, 23153 H/s (sim)
+  chunk @87000000: 88000000 hashes this segment, 23130 H/s (sim)
+  chunk @88000000: 89000000 hashes this segment, 23134 H/s (sim)
+  chunk @89000000: 90000000 hashes this segment, 23135 H/s (sim)
+  chunk @90000000: 91000000 hashes this segment, 23144 H/s (sim)
+  chunk @91000000: 92000000 hashes this segment, 23154 H/s (sim)
+  chunk @92000000: 93000000 hashes this segment, 23159 H/s (sim)
+  chunk @93000000: 94000000 hashes this segment, 23167 H/s (sim)
+  chunk @94000000: 95000000 hashes this segment, 23171 H/s (sim)
+  chunk @95000000: 96000000 hashes this segment, 23175 H/s (sim)
+  chunk @96000000: 97000000 hashes this segment, 23184 H/s (sim)
+  chunk @97000000: 98000000 hashes this segment, 23183 H/s (sim)
+  chunk @98000000: 99000000 hashes this segment, 23189 H/s (sim)
+  chunk @99000000: 100000000 hashes this segment, 23143 H/s (sim)
+  chunk @100000000: 101000000 hashes this segment, 23134 H/s (sim)
+  chunk @101000000: 102000000 hashes this segment, 23144 H/s (sim)
+  chunk @102000000: 103000000 hashes this segment, 23147 H/s (sim)
+  chunk @103000000: 104000000 hashes this segment, 23151 H/s (sim)
+  chunk @104000000: 105000000 hashes this segment, 23159 H/s (sim)
+  chunk @105000000: 106000000 hashes this segment, 23166 H/s (sim)
+  chunk @106000000: 107000000 hashes this segment, 23172 H/s (sim)
+  chunk @107000000: 108000000 hashes this segment, 23180 H/s (sim)
+  chunk @108000000: 109000000 hashes this segment, 23185 H/s (sim)
+  chunk @109000000: 110000000 hashes this segment, 23187 H/s (sim)
+  chunk @110000000: 111000000 hashes this segment, 23190 H/s (sim)
+  chunk @111000000: 112000000 hashes this segment, 23197 H/s (sim)
+  chunk @112000000: 113000000 hashes this segment, 23202 H/s (sim)
+  chunk @113000000: 114000000 hashes this segment, 23213 H/s (sim)
+  chunk @114000000: 115000000 hashes this segment, 23221 H/s (sim)
+  chunk @115000000: 116000000 hashes this segment, 23227 H/s (sim)
+  chunk @116000000: 117000000 hashes this segment, 23218 H/s (sim)
+  chunk @117000000: 118000000 hashes this segment, 23172 H/s (sim)
+  chunk @118000000: 119000000 hashes this segment, 23178 H/s (sim)
+  chunk @119000000: 120000000 hashes this segment, 23184 H/s (sim)
+  chunk @120000000: 121000000 hashes this segment, 23191 H/s (sim)
+  chunk @121000000: 122000000 hashes this segment, 23199 H/s (sim)
+  chunk @122000000: 123000000 hashes this segment, 23206 H/s (sim)
+  chunk @123000000: 124000000 hashes this segment, 23190 H/s (sim)
+  chunk @124000000: 125000000 hashes this segment, 23188 H/s (sim)
+  chunk @125000000: 126000000 hashes this segment, 23192 H/s (sim)
+  chunk @126000000: 127000000 hashes this segment, 23195 H/s (sim)
+  chunk @127000000: 128000000 hashes this segment, 23201 H/s (sim)
+  chunk @128000000: 129000000 hashes this segment, 23209 H/s (sim)
+  chunk @129000000: 130000000 hashes this segment, 23217 H/s (sim)
+  chunk @130000000: 131000000 hashes this segment, 23223 H/s (sim)
+  chunk @131000000: 132000000 hashes this segment, 23225 H/s (sim)
+  chunk @132000000: 133000000 hashes this segment, 23226 H/s (sim)
+  chunk @133000000: 134000000 hashes this segment, 23229 H/s (sim)
+  chunk @134000000: 135000000 hashes this segment, 23233 H/s (sim)
+  chunk @135000000: 136000000 hashes this segment, 23229 H/s (sim)
+  chunk @136000000: 137000000 hashes this segment, 23203 H/s (sim)
+  chunk @137000000: 138000000 hashes this segment, 23211 H/s (sim)
+  chunk @138000000: 139000000 hashes this segment, 23193 H/s (sim)
+  chunk @139000000: 140000000 hashes this segment, 23198 H/s (sim)
+  chunk @140000000: 141000000 hashes this segment, 23200 H/s (sim)
+  chunk @141000000: 142000000 hashes this segment, 23199 H/s (sim)
+  chunk @142000000: 143000000 hashes this segment, 23199 H/s (sim)
+  chunk @143000000: 144000000 hashes this segment, 23200 H/s (sim)
+  chunk @144000000: 145000000 hashes this segment, 23203 H/s (sim)
+  chunk @145000000: 146000000 hashes this segment, 23209 H/s (sim)
+  chunk @146000000: 147000000 hashes this segment, 23210 H/s (sim)
+  chunk @147000000: 148000000 hashes this segment, 23197 H/s (sim)
+  chunk @148000000: 149000000 hashes this segment, 23198 H/s (sim)
+  chunk @149000000: 150000000 hashes this segment, 23196 H/s (sim)
+  chunk @150000000: 151000000 hashes this segment, 23198 H/s (sim)
+  chunk @151000000: 152000000 hashes this segment, 23198 H/s (sim)
+  chunk @152000000: 153000000 hashes this segment, 23204 H/s (sim)
+  chunk @153000000: 154000000 hashes this segment, 23209 H/s (sim)
+  chunk @154000000: 155000000 hashes this segment, 23204 H/s (sim)
+  chunk @155000000: 156000000 hashes this segment, 23173 H/s (sim)
+  chunk @156000000: 157000000 hashes this segment, 23161 H/s (sim)
+  chunk @157000000: 158000000 hashes this segment, 23168 H/s (sim)
+  chunk @158000000: 159000000 hashes this segment, 23172 H/s (sim)
+  chunk @159000000: 160000000 hashes this segment, 23176 H/s (sim)
+  chunk @160000000: 161000000 hashes this segment, 23180 H/s (sim)
+  chunk @161000000: 162000000 hashes this segment, 23186 H/s (sim)
+  chunk @162000000: 163000000 hashes this segment, 23191 H/s (sim)
+  chunk @163000000: 164000000 hashes this segment, 23196 H/s (sim)
+  chunk @164000000: 165000000 hashes this segment, 23199 H/s (sim)
+  chunk @165000000: 166000000 hashes this segment, 23202 H/s (sim)
+  chunk @166000000: 167000000 hashes this segment, 23203 H/s (sim)
+  chunk @167000000: 168000000 hashes this segment, 23205 H/s (sim)
+  chunk @168000000: 169000000 hashes this segment, 23208 H/s (sim)
+  chunk @169000000: 170000000 hashes this segment, 23208 H/s (sim)
+  chunk @170000000: 171000000 hashes this segment, 23214 H/s (sim)
+live run started Sat Nov 21 18:51:57 UTC 2026 pool=bcmonster.com:9999 user=bc1qyv3amdpzz5lghwrkm50nhwa4y3cg6eldx0yvnt.spoon (switched from public-pool.io:21496 — wire-verified diff 0.001)
+Traceback (most recent call last):
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 267, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 223, in main
+    resp = pool.pump_until(sub_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 190, in pump_until
+    raise TimeoutError("timed out waiting for the pool")
+TimeoutError: timed out waiting for the pool
+client exited rc=1 at Sat Nov 21 18:52:17 UTC 2026
+Traceback (most recent call last):
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 267, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 223, in main
+    resp = pool.pump_until(sub_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 190, in pump_until
+    raise TimeoutError("timed out waiting for the pool")
+TimeoutError: timed out waiting for the pool
+client exited rc=1 at Sat Nov 21 18:52:42 UTC 2026
+Traceback (most recent call last):
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 267, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 223, in main
+    resp = pool.pump_until(sub_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 190, in pump_until
+    raise TimeoutError("timed out waiting for the pool")
+TimeoutError: timed out waiting for the pool
+client exited rc=1 at Sat Nov 21 18:53:07 UTC 2026
+Traceback (most recent call last):
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 267, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 223, in main
+    resp = pool.pump_until(sub_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 190, in pump_until
+    raise TimeoutError("timed out waiting for the pool")
+TimeoutError: timed out waiting for the pool
+client exited rc=1 at Sat Nov 21 18:53:32 UTC 2026
+Traceback (most recent call last):
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 267, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 223, in main
+    resp = pool.pump_until(sub_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 190, in pump_until
+    raise TimeoutError("timed out waiting for the pool")
+TimeoutError: timed out waiting for the pool
+client exited rc=1 at Sat Nov 21 18:53:57 UTC 2026
+Traceback (most recent call last):
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 267, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 223, in main
+    resp = pool.pump_until(sub_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 190, in pump_until
+    raise TimeoutError("timed out waiting for the pool")
+TimeoutError: timed out waiting for the pool
+client exited rc=1 at Sat Nov 21 18:54:22 UTC 2026
+Traceback (most recent call last):
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 267, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 223, in main
+    resp = pool.pump_until(sub_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 190, in pump_until
+    raise TimeoutError("timed out waiting for the pool")
+TimeoutError: timed out waiting for the pool
+client exited rc=1 at Sat Nov 21 18:54:48 UTC 2026
+Traceback (most recent call last):
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 267, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 223, in main
+    resp = pool.pump_until(sub_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 190, in pump_until
+    raise TimeoutError("timed out waiting for the pool")
+TimeoutError: timed out waiting for the pool
+client exited rc=1 at Sat Nov 21 18:55:13 UTC 2026
+Traceback (most recent call last):
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 267, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 223, in main
+    resp = pool.pump_until(sub_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 190, in pump_until
+    raise TimeoutError("timed out waiting for the pool")
+TimeoutError: timed out waiting for the pool
+client exited rc=1 at Sat Nov 21 18:55:38 UTC 2026
+Traceback (most recent call last):
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 267, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 223, in main
+    resp = pool.pump_until(sub_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 190, in pump_until
+    raise TimeoutError("timed out waiting for the pool")
+TimeoutError: timed out waiting for the pool
+client exited rc=1 at Sat Nov 21 18:56:03 UTC 2026
+Traceback (most recent call last):
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 267, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 223, in main
+    resp = pool.pump_until(sub_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 190, in pump_until
+    raise TimeoutError("timed out waiting for the pool")
+TimeoutError: timed out waiting for the pool
+client exited rc=1 at Sat Nov 21 18:56:28 UTC 2026
+Traceback (most recent call last):
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 267, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 223, in main
+    resp = pool.pump_until(sub_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 190, in pump_until
+    raise TimeoutError("timed out waiting for the pool")
+TimeoutError: timed out waiting for the pool
+client exited rc=1 at Sat Nov 21 18:56:53 UTC 2026
+Traceback (most recent call last):
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 267, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 223, in main
+    resp = pool.pump_until(sub_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 190, in pump_until
+    raise TimeoutError("timed out waiting for the pool")
+TimeoutError: timed out waiting for the pool
+client exited rc=1 at Sat Nov 21 18:57:18 UTC 2026
+Traceback (most recent call last):
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 267, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 223, in main
+    resp = pool.pump_until(sub_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 190, in pump_until
+    raise TimeoutError("timed out waiting for the pool")
+TimeoutError: timed out waiting for the pool
+client exited rc=1 at Sat Nov 21 18:57:44 UTC 2026
+Traceback (most recent call last):
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 267, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 223, in main
+    resp = pool.pump_until(sub_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 190, in pump_until
+    raise TimeoutError("timed out waiting for the pool")
+TimeoutError: timed out waiting for the pool
+client exited rc=1 at Sat Nov 21 18:58:09 UTC 2026
+Traceback (most recent call last):
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 267, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 223, in main
+    resp = pool.pump_until(sub_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 190, in pump_until
+    raise TimeoutError("timed out waiting for the pool")
+TimeoutError: timed out waiting for the pool
+client exited rc=1 at Sat Nov 21 18:58:34 UTC 2026
+Traceback (most recent call last):
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 267, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 223, in main
+    resp = pool.pump_until(sub_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 190, in pump_until
+    raise TimeoutError("timed out waiting for the pool")
+TimeoutError: timed out waiting for the pool
+client exited rc=1 at Sat Nov 21 18:58:59 UTC 2026
+Traceback (most recent call last):
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 267, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 223, in main
+    resp = pool.pump_until(sub_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 190, in pump_until
+    raise TimeoutError("timed out waiting for the pool")
+TimeoutError: timed out waiting for the pool
+client exited rc=1 at Sat Nov 21 18:59:24 UTC 2026
+Traceback (most recent call last):
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 267, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 223, in main
+    resp = pool.pump_until(sub_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 190, in pump_until
+    raise TimeoutError("timed out waiting for the pool")
+TimeoutError: timed out waiting for the pool
+client exited rc=1 at Sat Nov 21 18:59:49 UTC 2026
+Traceback (most recent call last):
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 267, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 223, in main
+    resp = pool.pump_until(sub_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/sha256-miner/host/stratum_miner_vl.py", line 190, in pump_until
+    raise TimeoutError("timed out waiting for the pool")
+TimeoutError: timed out waiting for the pool
+client exited rc=1 at Sat Nov 21 19:00:14 UTC 2026
+connected: extranonce1=0a9610650000 en2_size=4
+  chunk @0: 1000000 hashes this segment, 24441 H/s (sim)
+  chunk @1000000: 2000000 hashes this segment, 24457 H/s (sim)
+  chunk @2000000: 3000000 hashes this segment, 24575 H/s (sim)
+  chunk @3000000: 4000000 hashes this segment, 24591 H/s (sim)
+  chunk @4000000: 5000000 hashes this segment, 24275 H/s (sim)
+  chunk @5000000: 6000000 hashes this segment, 24258 H/s (sim)
+  chunk @6000000: 7000000 hashes this segment, 24325 H/s (sim)
+  chunk @7000000: 8000000 hashes this segment, 24333 H/s (sim)
+  chunk @8000000: 9000000 hashes this segment, 24413 H/s (sim)
+  chunk @9000000: 10000000 hashes this segment, 24449 H/s (sim)
+  chunk @10000000: 11000000 hashes this segment, 24434 H/s (sim)
+  chunk @11000000: 11760655 hashes this segment, 24393 H/s (sim)
+SHARE ACCEPTED #1 job=05ef222f nonce=11760654 hash=0000003e1bf12b15c6c8c4185ec902dcf9c14ccf5f46e892f779c59255dbd81f
+DONE: 1 share(s) accepted
+client exited rc=0 at Sat Nov 21 19:08:38 UTC 2026
+live run finished Sat Nov 21 19:08:38 UTC 2026
+live run started Sat Nov 21 19:09:39 UTC 2026 pool=bcmonster.com:9999 user=bc1qyv3amdpzz5lghwrkm50nhwa4y3cg6eldx0yvnt.spoon (switched from public-pool.io:21496 — wire-verified diff 0.001)
+connected: extranonce1=5296e95e0000 en2_size=4
+  chunk @0: 253704 hashes this segment, 24864 H/s (sim)
+SHARE ACCEPTED #1 job=289b2237 nonce=253703 hash=000001fea736abe4f426e2707b612e8d7545d7ae862258806994d94fb6713bfd
+DONE: 1 share(s) accepted
+client exited rc=0 at Sat Nov 21 19:09:52 UTC 2026
+live run finished Sat Nov 21 19:09:52 UTC 2026
+persistent hunt started Sat Nov 21 19:13:38 UTC 2026 pool=bcmonster.com:9999 user=bc1qyv3amdpzz5lghwrkm50nhwa4y3cg6eldx0yvnt.spoon
+connected: extranonce1=729754710000 en2_size=4
+  chunk @0: 1000000 hashes this segment, 21092 H/s (sim)
+  chunk @1000000: 2000000 hashes this segment, 18057 H/s (sim)
+  chunk @2000000: 3000000 hashes this segment, 16544 H/s (sim)
+  chunk @3000000: 4000000 hashes this segment, 16826 H/s (sim)
