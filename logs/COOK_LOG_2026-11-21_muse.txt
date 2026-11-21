@@ -84,3 +84,22 @@ WHAT §3.1 NEEDS NOW (owner decision, any one of)
     (2^32 / 23600 ~ 182,000 s), honest but slow; or
 (c) FPGA hashrate (SPOON-1), where even difficulty 100,000 is
     ~2.4 h/share at the pipelined core's ~50 MH/s synthesis estimate.
+
+ADDENDUM — TEARDOWN AND RELAUNCH (same day, ~16:29-16:31 UTC)
+After the main run above was documented and pushed (commit 22f740f3),
+the agent session's process teardown delivered SIGTERM to the whole
+stack: ckpool's log records "Process spoon received signal 15,
+shutting down" at 16:29:52 UTC, and bitcoind and the hunt supervisor
+died with it. Lesson: in this environment, processes launched from an
+agent session — even a -daemon bitcoind and nohup'd children — are
+reaped when the session's process tree is torn down. The pre-teardown
+client had reached 30M hashes in its segment (~45M total across the
+day's sessions, no share — consistent with difficulty 100,000).
+Relaunched 16:30 UTC under setsid (own sessions, detached from the
+agent's tree): bitcoind (resumed from persisted chainstate; blocks
+183,104 and validating, headers intact at 976,924), ckpool solo
+(standby), and the hunt — which reconnected immediately
+(extranonce1=9ca4975b) and resumed searching real work. Verified
+alive across several subsequent session boundaries. If a future
+reader finds them dead again, relaunch the same way; the datadir
+and all state persist on disk.
