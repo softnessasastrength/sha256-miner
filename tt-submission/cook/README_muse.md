@@ -38,6 +38,23 @@ Variable names were checked against the LibreLane 3.0.17 source in
 Ember's sandbox (`DRT_ANTENNA_REPAIR_JUMPER_ONLY` is the current name;
 the old `DIODE_INSERTION_STRATEGY` is removed in LibreLane ≥ 2.0).
 
+## Set up the G5 first (setup_g5_muse.sh)
+
+On the Dell G5 SE, run the setup script before the cook. It installs
+Docker, pulls the pinned LibreLane 3.0.17 container image (the route
+that supplies OpenROAD), creates a `~/librelane-venv` with the same
+pinned LibreLane, enables the pinned sky130 PDK via ciel, clones this
+repo to `~/sha256-miner`, and smoke-checks every piece before printing
+the cook command. It is idempotent — safe to re-run.
+
+```
+git clone https://github.com/softnessasastrength/sha256-miner.git
+bash sha256-miner/tt-submission/cook/setup_g5_muse.sh          # setup + smoke check
+bash sha256-miner/tt-submission/cook/setup_g5_muse.sh --cook   # ... then cook immediately
+```
+
+Then the one command below is the cook itself.
+
 ## The one command (Dell G5 SE, or any Docker/Nix host)
 
 ```
