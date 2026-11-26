@@ -1,0 +1,64 @@
+WINDOW ADOPTION — 2026-11-26 _muse
+Owner decision (2026-11-26): "Adopt the window patch, then cook."
+
+WHAT WAS ADOPTED
+Codex's 2026-11-21 message-schedule window redesign of sha256_core
+(branch codex/verification-cloud-2026-11-21, WINDOW_COOK_2026-11-21_codex):
+the message block is loaded directly into the 16-word sliding schedule
+window at `start`, reusing the schedule storage and dropping the separate
+512-bit input-block register (`blk`) the original carried.
+
+PROVENANCE, STATED EXACTLY
+The codex branch no longer exists on GitHub (verified 2026-11-26 via the
+API: the repo's only ref is refs/heads/main at af4f6445fa; no branches,
+no PRs, no tags carry Codex's files), and no copy of Codex's patched RTL
+survives locally. The adopted rtl/sha256_core.v is therefore Ember's
+faithful re-implementation of the design as Codex's report describes it
+(storage reuse, blk register dropped, identical interface and handshake),
+NOT Codex's byte-identical file. It was verified here from scratch (below)
+to the same standard Codex reported. The original core is preserved in
+git history: rtl/sha256_core.v at every head from a703bafbe1 (2026-11-17)
+through af4f6445fa (2026-11-21).
+
+DIFFERENTIAL VERIFICATION (Icarus Verilog 12.0, this sandbox)
+Bench: scratch tb_diff_window (original module vs window module, same
+stimulus in parallel; digests AND start->done cycle counts compared).
+  2 directed blocks (FIPS "abc" block, empty-message block)
+  256 arbitrary blocks with arbitrary chaining values (seed 0xC0DEC0DE)
+Result: DIFF PASS — 258 runs, digests and done-timing identical, 0 errors.
+
+PROJECT TESTBENCHES (make targets, Icarus, patched mainline RTL)
+  tb_sha256_core        ALL 3 TESTS PASSED  (abc / empty / nist-56B FIPS)
+  tb_sha256d_core       ALL 2 TESTS PASSED  (genesis-block hash reproduced,
+                                             synthetic-header)
+  tb_sha256d_search     ALL 3 TESTS PASSED  (genesis nonce 2083236893
+                                             recovered in 501 hashes,
+                                             synthetic sweep, exhaustion)
+  tb_sha256_pipe        ALL 20 TESTS PASSED (pipelined core, unchanged RTL)
+  tb_sha256d_pipe_search ALL 3 TESTS PASSED (pipelined search, unchanged)
+
+SYNTHESIS A/B (Yosys 0.33, sky130_fd_sc_hd tt_025C_1v80 liberty, the
+project's 2026-11-20 recipe: synth; dfflibmap -liberty; abc -liberty;
+stat -liberty). Recipe fidelity check: the original core reproduces the
+recorded baseline EXACTLY (9,344 cells / 82,893.25 um2 core-only stat in
+dfflibmap context; synth_top total 20,305 cells / 217,335.94 um2).
+  sha256_core alone:  orig 9,344 cells / 82,893.25 um2
+                      win  7,767 cells / 67,029.29 um2   (-16.9% / -19.1%)
+  synth_top (serial wrapper, both cores):
+                      orig 20,305 cells / 217,335.94 um2
+                      win  18,830 cells / 201,638.39 um2 (-7.3% / -7.2%)
+Codex's LibreLane-mapped wrapper figures were 241,800.66 -> 224,889.44 um2
+(-6.99%) — a different measurement point (post-mapping), same direction
+and magnitude as the pre-mapping stat above.
+
+FLOORPLAN CORRECTION (same adoption)
+tt-submission/src/config_local_muse.json DIE_AREA was "0 0 1400 300",
+which exceeds the official TinyTapeout 8x2 outline in both dimensions
+(Codex's correction, 2026-11-21). Corrected to "0 0 1378.16 225.76"
+(official outline 1378.16 x 225.76 um = 311,133.40 um2 gross).
+
+NOT DONE HERE
+No OpenROAD/LibreLane run: this sandbox has no obtainable OpenROAD binary
+(unchanged since 2026-11-20). The closure cook is packaged in
+tt-submission/cook/ and runs on the owner's Dell G5 SE (see its README).
+No shuttle purchase, no submission.

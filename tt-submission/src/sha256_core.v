@@ -1,6 +1,24 @@
 // sha256_core.v — iterative SHA-256 compression core (FIPS 180-4)
 // _muse — written 2026-11-17 for Branden's hand-built mining core project.
 //
+// WINDOW REDESIGN — adopted into mainline 2026-11-26 by the owner's
+// decision ("Adopt the window patch, then cook", 2026-11-26).
+// Design per Codex's 2026-11-21 window cook (branch
+// codex/verification-cloud-2026-11-21, logs/WINDOW_COOK_2026-11-21_codex.txt):
+// the message block is loaded directly into the 16-word sliding schedule
+// window at `start`, reusing the schedule storage and dropping the
+// separate 512-bit input-block register (`blk`) the original carried.
+// Codex reported, differentially verified over 256 arbitrary blocks:
+// mapped wrapper area -6.99%, global-routing overflow 41,348 -> 13,566,
+// pre-route min period 13.58 -> 12.34 ns. The Codex branch was deleted
+// before adoption, so this file is Ember's faithful re-implementation of
+// that described design (same storage reuse, same handshake, identical
+// cycle behaviour from round 16 onward by construction), re-verified
+// locally by differential simulation against the original core — see
+// logs/WINDOW_ADOPTION_2026-11-26_muse.txt. The original file is
+// preserved in git history (commit a703bafbe1 and every head through
+// af4f6445fa) and is recoverable from any of those commits.
+//
 // One 512-bit block per invocation, 64 rounds, one round per clock.
 // Interface: present `block` and `state_in` (the chaining value; use the
 // standard IV for the first block of a message), pulse `start` for one
@@ -81,13 +99,20 @@ module sha256_core (
     reg [5:0]   t;
     reg [31:0]  a, b, c, d, e, f, g, h;
     reg [31:0]  w [0:15];        // sliding window: w[15] = W[t-1], w[0] = W[t-16]
-    reg [511:0] blk;             // unconsumed message words, MSB first
     reg [255:0] st;              // latched chaining value for the final add
     integer     i;
 
     // ---- Combinational round ----
+    // Window invariant during round t (t >= 16): w[k] = W[t-16+k], so
+    // w[0]=W[t-16], w[1]=W[t-15], w[9]=W[t-7], w[14]=W[t-2].
+    // During rounds 0..15 the block itself circulates through the window:
+    // at `start` the window is loaded with the block (w[k] = W[k]); each
+    // round consumes w[0] (= W[t]) and shifts that same word back into
+    // w[15], so after 16 rounds the window again holds W[0..15] in order
+    // and the invariant above takes over. The word shifted into w[15] is
+    // therefore w_round in every round — no separate block register.
     wire [31:0] w_expand = s1(w[14]) + w[9] + s0(w[1]) + w[0];
-    wire [31:0] w_round  = (t < 6'd16) ? blk[511:480] : w_expand;
+    wire [31:0] w_round  = (t < 6'd16) ? w[0] : w_expand;
     wire [31:0] S1  = rotr(e, 6) ^ rotr(e, 11) ^ rotr(e, 25);
     wire [31:0] ch  = (e & f) ^ (~e & g);
     wire [31:0] t1  = h + S1 + ch + K(t) + w_round;
@@ -112,12 +137,14 @@ module sha256_core (
                 c <= state_in[191:160]; d <= state_in[159:128];
                 e <= state_in[127:96];  f <= state_in[95:64];
                 g <= state_in[63:32];   h <= state_in[31:0];
-                blk <= block;
+                // Load the block straight into the schedule window:
+                // w[0] = first message word (MSB), w[15] = last.
+                for (i = 0; i < 16; i = i + 1)
+                    w[i] <= block[511 - 32*i -: 32];
                 st  <= state_in;
             end else if (busy) begin
                 for (i = 0; i < 15; i = i + 1) w[i] <= w[i+1];
                 w[15] <= w_round;
-                blk   <= {blk[479:0], 32'b0};
                 a <= a_n; b <= a; c <= b; d <= c;
                 e <= e_n; f <= e; g <= f; h <= g;
                 if (t == 6'd63) begin

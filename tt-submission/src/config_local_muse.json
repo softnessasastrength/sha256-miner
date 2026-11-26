@@ -29,6 +29,6 @@
     "dir::sha256d_core.v",
     "dir::sha256d_search.v"
   ],
-  "DIE_AREA": "0 0 1400 300",
+  "DIE_AREA": "0 0 1378.16 225.76",
   "FP_PIN_ORDER_CFG": null
 }
